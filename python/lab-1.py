@@ -12,12 +12,12 @@ max_angle=0
 q=Queue()
 
 
-pix = numpy.asarray(Image.open('./картинки/1.bmp').convert('L'))
+pixx = numpy.asarray(Image.open('./картинки/1.bmp').convert('L'))
+pix=pixx.copy()
 
+line_vec = vector.obj(x=0,y=0)
 
-line_vec = vector.obj(0,0)
-
-A=[[vector.obj(0,0) for i in range(30)]for i in range(30)]
+A=[[vector.obj(x=0,y=0) for i in range(30)]for i in range(30)]
 
 
 def Step(vect, tail):
@@ -27,20 +27,20 @@ def Step(vect, tail):
     if pix[i][j]!=0: return
     pix[i][j]=-1
     q.put([vect,tail])
-    tail.pop(0)
-    Step( vector.obj(-1, -1),tail+[i-1, j-1])
-    Step( vector.obj(-1, 0),tail+[i-1, j])
-    Step( vector.obj(-1, +1),tail+[i-1, j+1])
-    Step( vector.obj(0, -1),tail+[i, j-1])
-    Step( vector.obj(0, +1),tail+[i, j+1])
-    Step( vector.obj(+1, -1),tail+[i+1, j-1])
-    Step( vector.obj(+1, 0),tail+[i+1, j])
-    Step( vector.obj(+1, +1),tail+[i+1, j+1])
+    if tail.__len__==5: tail.pop(0)
+    Step( vector.obj(x=-1, y=-1),tail+[i-1, j-1])
+    Step( vector.obj(x=-1, y=0),tail+[i-1, j])
+    Step( vector.obj(x=-1, y=1),tail+[i-1, j+1])
+    Step( vector.obj(x=0, y=-1),tail+[i, j-1])
+    Step( vector.obj(x=0, y=1),tail+[i, j+1])
+    Step( vector.obj(x=1, y=-1),tail+[i+1, j-1])
+    Step( vector.obj(x=1, y=0),tail+[i+1, j])
+    Step( vector.obj(x=1, y=1),tail+[i+1, j+1])
 
     return
 
 def wind(vect, track):
-    cur_vec = vector.obj(0,0)
+    cur_vec = vector.obj(x=0,y=0)
     for i in track:
         cur_vec+=vect
     A[track[0][0]][track[0][1]]=vector.normalize
@@ -51,7 +51,7 @@ def wind(vect, track):
 for i in range(30):
     for j in range(30):
         if pix[i][j]==0:
-            Step(i,j)
+            Step(vector.obj(x=0, y=0), [[i,j]])
 
 for i in q:
     wind(i[0],i[1])
