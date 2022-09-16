@@ -1,26 +1,26 @@
 import collections
-from email.mime import image
+from copy import copy
 import os
 from queue import Queue
 import queue
 from typing import List, Tuple
-from PIL import Image
+from PIL import Image, ImageChops
 import numpy as np
-
-TAIL=5                      #4
-ANGLE=0.92  #cos of angle   #0.93
+                            #best
+TAIL=4                      #4
+ANGLE=0.92  #cos of angle   #0.92
 COUNT = 16  #pictures       #16
 RESOLUTION=30               #30
+LOOP_DELTA=1                #1
 
-
-loop=False
+Loop=False
 angles=0
 
-def transform(id, vector):
+def transform(image, vector):
     q=[]
     Path=[]
 
-    pixx = np.asarray(Image.open('./картинки/'+str(id+1)+'.bmp').convert('L'))
+    pixx = np.asarray(image)
     pix=pixx.copy()
     for i in range(RESOLUTION):
         for j in range(RESOLUTION):
@@ -106,9 +106,26 @@ def transform(id, vector):
     for i in Path:
         wind(i[0],i[1])
         
+    end = Path[-1][1][-1]
+
+    for x in range():
+        for y in range():
+            if(x>=0 and y>=0 and x<RESOLUTION and y<RESOLUTION and (A[x][y]!=np.array(0,0,0)).any() and np.dot(A[end[0]][end[1]], A[x][y])<-0.95):
+                Loop=True
+
     if(vector): return view()
     else: return Image.fromarray(pix)
 
+def double_check(image):
+    image_copy=copy(image)
+    image_copy=image_copy.rotate(180)
+
+    image1=(transform(image, False))
+    image2=(transform(image_copy, False).rotate(180))
+
+    im3 = ImageChops.multiply(image1, image2)
+   
+    return im3
 
 #коллажик 
 def find_multiples(number : int):
@@ -143,7 +160,7 @@ def get_smallest_multiples(number : int, smallest_first = True) -> Tuple[int, in
         
     return result[0], result[1]
     
-def create_collage(listofimages : List[str], n_cols : int = 0, n_rows: int = 0, 
+def create_collage(listofimages : List[str], isSave=False, n_cols : int = 0, n_rows: int = 0, 
                    thumbnail_scale : float = 1.0, thumbnail_width : int = 0, thumbnail_height : int = 0):
     
     n_cols = n_cols if n_cols >= 0 else abs(n_cols)
@@ -192,28 +209,33 @@ def create_collage(listofimages : List[str], n_cols : int = 0, n_rows: int = 0,
 
     destination_file = os.path.join(os.path.dirname("./results/"), f"Angle = {ANGLE} Tail = {TAIL}.jpg")
     new_im.show()
-    # if os.path.exists(destination_file):
-    #     os.remove(destination_file)
-    # new_im.save(destination_file)
+    if (isSave):
+        if os.path.exists(destination_file):
+            os.remove(destination_file)
+        new_im.save(destination_file)
 
+#tests
 def test_part1():
     images=[]
     for i in range(COUNT):
-        images.append(transform(i, False))
-
+        image = Image.open('./картинки/'+str(id+1)+'.bmp').convert('L')
+        images.append(transform(image, False))
     create_collage(images)
 
 def test_part1_vector():
     vectors=[]
     for i in range(COUNT):
-        vectors.append(transform(i, True))
+        image = Image.open('./картинки/'+str(id+1)+'.bmp').convert('L')
+        vectors.append(transform(image, True))
     create_collage(vectors)
 
-def test_part2():
+def test_part2(save):
     images=[]
     for i in range(COUNT):
-        images.append(Image.fromarray(Union(transform(i,False))))
-    create_collage(images)
+        image = Image.open('./картинки/'+str(i+1)+'.bmp').convert('L')
+        #images.append(Image.fromarray(Union(transform(image, False))))
+        images.append(Image.fromarray(Union(double_check(image))))
+    create_collage(images, save)
 
 def Union(image):
     pict=np.asarray(image).copy()
@@ -239,4 +261,6 @@ def Union(image):
     return pict
 
 #test_part1()
-test_part2()
+#test_part2(False)
+
+print(loop)
