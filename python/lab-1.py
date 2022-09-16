@@ -7,10 +7,10 @@ from typing import List, Tuple
 from PIL import Image
 import numpy as np
 
-TAIL=4
-ANGLE=0.95  #cos of angle
-COUNT = 16  #pictures
-
+TAIL=5                      #4
+ANGLE=0.92  #cos of angle   #0.93
+COUNT = 16  #pictures       #16
+RESOLUTION=30               #30
 
 
 loop=False
@@ -22,18 +22,18 @@ def transform(id, vector):
 
     pixx = np.asarray(Image.open('./картинки/'+str(id+1)+'.bmp').convert('L'))
     pix=pixx.copy()
-    for i in range(30):
-        for j in range(30):
+    for i in range(RESOLUTION):
+        for j in range(RESOLUTION):
             if pix[i][j]<200:
                 pix[i][j]=0
     
-    A=[[np.array([0,0,0]) for i in range(30)]for i in range(30)]
+    A=[[np.array([0,0,0]) for i in range(RESOLUTION)]for i in range(RESOLUTION)]
 
     def Step(vect, tail):
         i=tail[-1][0]
         j=tail[-1][1]
 
-        if i<0 or j<0 or i>29 or j>29: return
+        if i<0 or j<0 or i>RESOLUTION-1 or j>RESOLUTION-1: return
         if pix[i][j]!=0: return     #условия
 
         Path.append([vect,tail])
@@ -78,8 +78,8 @@ def transform(id, vector):
 
 
     def start():
-        for i in range(30):
-            for j in range(30):
+        for i in range(RESOLUTION):
+            for j in range(RESOLUTION):
                 if pix[i][j]==0:
                     start=[i,j]
                     q.append([np.array([0, 0,0]), [[i,j]]])
@@ -96,8 +96,8 @@ def transform(id, vector):
         return out_img
 
     start()
-
     indx=0
+
     while indx<len(q):
         i=q[indx]
         Step(i[0],i[1])
@@ -106,8 +106,6 @@ def transform(id, vector):
     for i in Path:
         wind(i[0],i[1])
         
-
-    #view()
     if(vector): return view()
     else: return Image.fromarray(pix)
 
@@ -192,11 +190,11 @@ def create_collage(listofimages : List[str], n_cols : int = 0, n_rows: int = 0,
         x += thumbnail_width
         y = 0
 
-    #extension = os.path.splitext(listofimages[0])[1]
-    # if extension == "":
-    #     extension = ".jpg"
-    #destination_file = os.path.join(os.path.dirname("str"),f"Collage")#listofimages[0]), f"Collage")
-    new_im.show()#save(destination_file)
+    destination_file = os.path.join(os.path.dirname("./results/"), f"Angle = {ANGLE} Tail = {TAIL}.jpg")
+    new_im.show()
+    # if os.path.exists(destination_file):
+    #     os.remove(destination_file)
+    # new_im.save(destination_file)
 
 def test_part1():
     images=[]
@@ -211,8 +209,34 @@ def test_part1_vector():
         vectors.append(transform(i, True))
     create_collage(vectors)
 
-test_part1()
-
 def test_part2():
-    image=transform(0,False)
-    
+    images=[]
+    for i in range(COUNT):
+        images.append(Image.fromarray(Union(transform(i,False))))
+    create_collage(images)
+
+def Union(image):
+    pict=np.asarray(image).copy()
+    points = []
+
+    def larger(point):
+        i=point[0]
+        j=point[1]
+        if(i>0 and j>0):pict[i-1][j-1]=0
+        if(i>0):pict[i-1][j]=0
+        if(i>0 and j<RESOLUTION-1):pict[i-1][j+1]=0
+        if(j>0):pict[i][j-1]=0
+        if(j<RESOLUTION-1):pict[i][j+1]=0
+        if(i<RESOLUTION-1 and j>0):pict[i+1][j-1]=0
+        if(i<RESOLUTION-1):pict[i+1][j]=0
+        if(i<RESOLUTION-1 and j<RESOLUTION-1):pict[i+1][j+1]=0
+
+    for i in range(RESOLUTION):
+        for j in range(RESOLUTION):
+            if pict[i][j]==0: points.append([i,j])
+    for i in points:
+        larger(i)
+    return pict
+
+#test_part1()
+test_part2()
