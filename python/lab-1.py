@@ -8,13 +8,13 @@ from PIL import Image, ImageChops
 import numpy as np
                             #best
 TAIL=4                      #4
-ANGLE=0.92  #cos of angle   #0.92
+ANGLE=0.9  #cos of angle   #0.9
 COUNT = 16  #pictures       #16
 RESOLUTION=30               #30
 LOOP_DELTA=1                #1
 
 Loop=False
-angles=0
+Angles=0
 
 def transform(image, vector):
     q=[]
@@ -105,14 +105,7 @@ def transform(image, vector):
 
     for i in Path:
         wind(i[0],i[1])
-        
-    end = Path[-1][1][-1]
-
-    for x in range():
-        for y in range():
-            if(x>=0 and y>=0 and x<RESOLUTION and y<RESOLUTION and (A[x][y]!=np.array(0,0,0)).any() and np.dot(A[end[0]][end[1]], A[x][y])<-0.95):
-                Loop=True
-
+                
     if(vector): return view()
     else: return Image.fromarray(pix)
 
@@ -214,29 +207,6 @@ def create_collage(listofimages : List[str], isSave=False, n_cols : int = 0, n_r
             os.remove(destination_file)
         new_im.save(destination_file)
 
-#tests
-def test_part1():
-    images=[]
-    for i in range(COUNT):
-        image = Image.open('./картинки/'+str(id+1)+'.bmp').convert('L')
-        images.append(transform(image, False))
-    create_collage(images)
-
-def test_part1_vector():
-    vectors=[]
-    for i in range(COUNT):
-        image = Image.open('./картинки/'+str(id+1)+'.bmp').convert('L')
-        vectors.append(transform(image, True))
-    create_collage(vectors)
-
-def test_part2(save):
-    images=[]
-    for i in range(COUNT):
-        image = Image.open('./картинки/'+str(i+1)+'.bmp').convert('L')
-        #images.append(Image.fromarray(Union(transform(image, False))))
-        images.append(Image.fromarray(Union(double_check(image))))
-    create_collage(images, save)
-
 def Union(image):
     pict=np.asarray(image).copy()
     points = []
@@ -259,8 +229,86 @@ def Union(image):
     for i in points:
         larger(i)
     return pict
+   
+def angle_count(pict):
+    
+    def Clean(i,j):
+            pict[i][j]=150
+            for x in range(i-1,i+2):
+                for y in range(j-1,j+2):
+                    if(x>=0 and y>=0 and x<RESOLUTION and y<RESOLUTION and pict[x][y]==0): Clean(x,y)
+    angls=0
+    for i in range(RESOLUTION):
+        for j in range(RESOLUTION):
+            if(pict[i][j]==0):
+                angls+=1
+                Clean(i,j)
+    return angls
 
-#test_part1()
-#test_part2(False)
+def loop_check(image):
+    pict = np.asarray(image).copy()
+    def Clean(x,y):
+            pict[x][y]=150
+            if(x+1<RESOLUTION and pict[x+1][y]==255): Clean(x+1,y)
+            if(x>0 and pict[x-1][y]==255): Clean(x-1,y)
+            if(y+1<RESOLUTION and pict[x][y+1]==255): Clean(x,y+1)
+            if(y>0 and pict[x][y-1]==255): Clean(x,y-1)
 
-print(loop)
+    def Start():
+        for x in range(RESOLUTION):
+            for y in range(RESOLUTION):
+                if(pict[x][y]==255):
+                    Clean(x,y)
+                    return
+    
+    Start()
+
+    #Image.fromarray(pict).show()
+    for i in range(RESOLUTION):
+        for j in range(RESOLUTION):
+            if (pict[i][j]==255):return True
+    return False
+
+def Conclusion(loop, angles):
+    if(loop==False):
+        if(angles==0): print("прямая")
+        else: print("ломанная")
+    else:
+        if(angles==0):print("круг")
+        elif(angles<3): print("овал")
+        elif(angles==3): print("треугольник")
+        elif(angles==4): print("квадрат")
+        else: print("круг")
+            
+#tests
+def test_part1():
+    images=[]
+    vectors=[]
+    for i in range(COUNT):
+        image = Image.open('./картинки/'+str(i+1)+'.bmp').convert('L')
+        images.append(transform(image, False))
+        vectors.append(transform(image, True))
+    create_collage(vectors)
+    create_collage(images)
+
+def test_part2(save):
+    images=[]
+    for i in range(COUNT):
+        image = Image.open('./картинки/'+str(i+1)+'.bmp').convert('L')
+        images.append(Image.fromarray(Union(double_check(image))))
+    create_collage(images, save)
+    return images
+
+def test_part3(images):
+    for image in images:
+        ang = angle_count(np.asarray(image).copy())
+        loop=loop_check(image)
+        Conclusion(loop, ang)
+
+# test_part1()
+# test_part2(False)
+test_part3(test_part2(False))
+
+# image = Image.open('./картинки/1.bmp').convert('L')
+# print(loop_check(image))
+
