@@ -1,4 +1,3 @@
-import collections
 from copy import copy
 import os
 from queue import Queue
@@ -6,20 +5,21 @@ import queue
 from typing import List, Tuple
 from PIL import Image, ImageChops
 import numpy as np
+
+
+#параметры программы
                             #best
-TAIL=4                      #4
-ANGLE=0.9  #cos of angle   #0.9
+TAIL=4                      #4          влияет на скорость изменения вектора
+ANGLE=0.9  #cos of angle   #0.9         отделяет угол от прямой
 COUNT = 16  #pictures       #16
 RESOLUTION=30               #30
-LOOP_DELTA=1                #1
 
-Loop=False
-Angles=0
-
+#функция находит углы
 def transform(image, vector):
     q=[]
     Path=[]
 
+    #предобработка изображения на всякий случай
     pixx = np.asarray(image)
     pix=pixx.copy()
     for i in range(RESOLUTION):
@@ -29,6 +29,7 @@ def transform(image, vector):
     
     A=[[np.array([0,0,0]) for i in range(RESOLUTION)]for i in range(RESOLUTION)]
 
+    #проходит по закрашенным точкам и добавляет их в очередь
     def Step(vect, tail):
         i=tail[-1][0]
         j=tail[-1][1]
@@ -55,6 +56,7 @@ def transform(image, vector):
 
         return
 
+    #проходит по очереди и сопоставляет каждой точке вектор 
     def wind(vect, track):
         cur_vec = np.array([0,0,0])
         for i in track:
@@ -64,7 +66,7 @@ def transform(image, vector):
         if np.linalg.norm(cur_vec)!=0:
             cur_vec=cur_vec/np.linalg.norm(cur_vec)
         A[track[-1][0]][track[-1][1]]=cur_vec
-
+    #изменяет цвет точек в зависимости от изменения вектора по пути обхода
         value=np.dot(A[track[-1][0]][track[-1][1]], A[track[0][0]][track[0][1]])
         if(value>ANGLE): value = 1
         else: value=0
@@ -76,7 +78,7 @@ def transform(image, vector):
             pix[track[0][0]][track[0][1]]=155
         return
 
-
+    #поиск начальной точки
     def start():
         for i in range(RESOLUTION):
             for j in range(RESOLUTION):
@@ -84,7 +86,7 @@ def transform(image, vector):
                     start=[i,j]
                     q.append([np.array([0, 0,0]), [[i,j]]])
                     return
-
+    #просмотр векторной формы
     def view():
         red = [[abs(i[0]*255) for i in j] for j in A]
         green = [[abs(i[1]*255) for i in j] for j in A]
@@ -108,7 +110,7 @@ def transform(image, vector):
                 
     if(vector): return view()
     else: return Image.fromarray(pix)
-
+#повторный проход для повернутого изображения
 def double_check(image):
     image_copy=copy(image)
     image_copy=image_copy.rotate(180)
@@ -136,7 +138,7 @@ def find_multiples(number : int):
         multiples.add((2, div + mod))
         
     return list(multiples)
-
+#коллажик
 def get_smallest_multiples(number : int, smallest_first = True) -> Tuple[int, int]:
     multiples = find_multiples(number)
     smallest_sum = number
@@ -152,7 +154,7 @@ def get_smallest_multiples(number : int, smallest_first = True) -> Tuple[int, in
         result.sort()
         
     return result[0], result[1]
-    
+#коллажик 
 def create_collage(listofimages : List[str], isSave=False, n_cols : int = 0, n_rows: int = 0, 
                    thumbnail_scale : float = 1.0, thumbnail_width : int = 0, thumbnail_height : int = 0):
     
@@ -206,7 +208,7 @@ def create_collage(listofimages : List[str], isSave=False, n_cols : int = 0, n_r
         if os.path.exists(destination_file):
             os.remove(destination_file)
         new_im.save(destination_file)
-
+#расширение найденных точек 
 def Union(image):
     pict=np.asarray(image).copy()
     points = []
@@ -229,7 +231,7 @@ def Union(image):
     for i in points:
         larger(i)
     return pict
-   
+ 
 def angle_count(pict):
     
     def Clean(i,j):
@@ -305,10 +307,13 @@ def test_part3(images):
         loop=loop_check(image)
         Conclusion(loop, ang)
 
-# test_part1()
+#test_part1()
 # test_part2(False)
-test_part3(test_part2(False))
+#test_part3(test_part2(False))
 
-# image = Image.open('./картинки/1.bmp').convert('L')
-# print(loop_check(image))
 
+for i in range(COUNT):
+        image = Image.open('./картинки/'+str(i+1)+'.bmp').convert('L')
+        mod_pict=Union(double_check(image))
+        Conclusion(loop_check(image),angle_count(mod_pict))
+        
