@@ -11,11 +11,12 @@ static const struct
 {
     float x, y;
     float r, g, b;
-} vertices[3] =
+} vertices[4] =
 {
-    { -0.6f, -0.4f, 1.f, 0.f, 0.f },
-    {  0.6f, -0.4f, 0.f, 1.f, 0.f },
-    {   0.f,  0.6f, 0.f, 0.f, 1.f }
+    { -0.6f, -0.6f, 1.f, 1.f, 0.f },
+    {  0.6f, -0.6f, 0.f, 1.f, 1.f },
+    {  0.6f, 0.6f, 1.f, 0.f, 0.f },
+    { -0.6f, 0.6f, 0.f, 1.f, 1.f }
 };
 
 static const char* vertex_shader_text =
@@ -43,19 +44,55 @@ static void error_callback(int error, const char* description)
     fprintf(stderr, "Error: %s\n", description);
 }
 
+
+int moving_direction_x = 0;
+int moving_direction_y = 0;
+int rotation = 0;
+
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+    if (key == GLFW_KEY_DOWN)
+        if (action == GLFW_PRESS)
+            moving_direction_y -= 1;
+        else moving_direction_y += 1;
+    if (key == GLFW_KEY_UP)
+        if (action == GLFW_PRESS)
+            moving_direction_y += 1;
+        else moving_direction_y -= 1;
+    if (key == GLFW_KEY_LEFT)
+        if (action == GLFW_PRESS)
+            moving_direction_x -= 1;
+        else moving_direction_x += 1;
+    if (key == GLFW_KEY_RIGHT)
+        if (action == GLFW_PRESS)
+            moving_direction_x += 1;
+        else moving_direction_x -= 1;
+
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
 
-int main1(void)
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
+        rotation = 1;
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+        rotation = -1;
+    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
+        rotation -= 1;
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+        rotation -= -1;
+}
+
+
+int main(void)
 {
     GLFWwindow* window;
     GLuint vertex_buffer, vertex_shader, fragment_shader, program;
     GLint mvp_location, vpos_location, vcol_location;
 
     glfwSetErrorCallback(error_callback);
+
 
     if (!glfwInit())
         exit(EXIT_FAILURE);
@@ -71,12 +108,13 @@ int main1(void)
     }
 
     glfwSetKeyCallback(window, key_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
 
     glfwMakeContextCurrent(window);
     gladLoadGL();
     glfwSwapInterval(1);
 
-    // NOTE: OpenGL error checks have been omitted for brevity
+    //NOTE: OpenGL error checks have been omitted for brevity
 
     glGenBuffers(1, &vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
@@ -106,6 +144,11 @@ int main1(void)
     glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,
         sizeof(vertices[0]), (void*)(sizeof(float) * 2));
 
+    float speed = 0.01f;
+    float offsetX = 0;
+    float offsetY = 0;
+    float rotate_offset = 0;
+
     while (!glfwWindowShouldClose(window))
     {
         float ratio;
@@ -114,18 +157,23 @@ int main1(void)
 
         glfwGetFramebufferSize(window, &width, &height);
         ratio = width / (float)height;
-
+        //(float)glfwGetTime()
         glViewport(0, 0, width, height);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        rotate_offset += rotation*speed*10;
         mat4x4_identity(m);
-        mat4x4_rotate_Z(m, m, (float)glfwGetTime());
-        mat4x4_ortho(p, -ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+        mat4x4_rotate_Z(m, m, rotate_offset);
+
+        offsetX -= (float)glfwGetTime() * moving_direction_x * speed;
+        offsetY -= (float)glfwGetTime() * moving_direction_y * speed;
+        mat4x4_ortho(p, -ratio+offsetX, ratio+offsetX, -1.f+offsetY, 1.f+offsetY, 1.f, -1.f);
+
         mat4x4_mul(mvp, p, m);
 
         glUseProgram(program);
         glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)mvp);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_QUADS, 0, 4);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

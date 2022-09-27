@@ -116,13 +116,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\include;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\include;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\.circleci;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\include;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\src;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glad.h;linmath.h;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\lib-vc2022;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -133,20 +133,25 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\include;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\src;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glad.h;linmath.h;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\lib-vc2022;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\src;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\glad\src\glad.c" />
     <ClCompile Include="Lab1.cpp" />
     <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\glad\include\glad\glad.h" />
+    <ClInclude Include="..\linmath\linmath.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

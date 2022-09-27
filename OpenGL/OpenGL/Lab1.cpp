@@ -14,7 +14,7 @@ static void change_size_callback(GLFWwindow* window, int width, int height) {
     Height = height;
 }
 
-int main(void)
+int main1(void)
 {
     GLFWwindow* window;
 
