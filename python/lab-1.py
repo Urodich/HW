@@ -311,7 +311,7 @@ def test_part3(images):
 # test_part2(False)
 #test_part3(test_part2(False))
 
-
+print()
 for i in range(COUNT):
         image = Image.open('./картинки/'+str(i+1)+'.bmp').convert('L')
         mod_pict=Union(double_check(image))
