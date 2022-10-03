@@ -2,7 +2,7 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
-#include "./linmath.h"
+#include "../linmath.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -11,12 +11,12 @@ static const struct
 {
     float x, y;
     float r, g, b;
-} squd[4] =
+} squad[4] =
 {
-    { -0.6f, -0.6f, 1.f, 1.f, 0.f },
-    {  0.6f, -0.6f, 0.f, 1.f, 1.f },
-    {  0.6f, 0.6f, 1.f, 0.f, 0.f },
-    { -0.6f, 0.6f, 0.f, 1.f, 1.f }
+    { -0.2f, -0.2f, 1.f, 1.f, 0.f },
+    {  0.2f, -0.2f, 0.f, 1.f, 1.f },
+    {  0.2f, 0.2f, 1.f, 0.f, 0.f },
+    { -0.2f, 0.2f, 0.f, 1.f, 1.f }
 },
 triangle[3] =
 {
@@ -94,7 +94,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 int main(void)
 {
     GLFWwindow* window;
-    GLuint vertex_buffer, vertex_shader, fragment_shader, program;
+    GLuint squad_vertex_buffer, triangle_vertex_buffer, vertex_shader, fragment_shader, program;
     GLint mvp_location, vpos_location, vcol_location;
 
     glfwSetErrorCallback(error_callback);
@@ -122,10 +122,14 @@ int main(void)
 
     //NOTE: OpenGL error checks have been omitted for brevity
 
-    glGenBuffers(1, &vertex_buffer);
-    glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glGenBuffers(1, &squad_vertex_buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, squad_vertex_buffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(squad_vertex_buffer), squad, GL_STATIC_DRAW);
 
+    glGenBuffers(1, &triangle_vertex_buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, triangle_vertex_buffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle_vertex_buffer), triangle, GL_STATIC_DRAW);
+    
     vertex_shader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex_shader, 1, &vertex_shader_text, NULL);
     glCompileShader(vertex_shader);
@@ -139,16 +143,19 @@ int main(void)
     glAttachShader(program, fragment_shader);
     glLinkProgram(program);
 
+    glDeleteShader(vertex_shader);
+    glDeleteShader(fragment_shader);
+
     mvp_location = glGetUniformLocation(program, "MVP");
     vpos_location = glGetAttribLocation(program, "vPos");
     vcol_location = glGetAttribLocation(program, "vCol");
 
+    
+
     glEnableVertexAttribArray(vpos_location);
-    glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE,
-        sizeof(vertices[0]), (void*)0);
+    glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE, sizeof(triangle[0]), (void*)0);
     glEnableVertexAttribArray(vcol_location);
-    glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,
-        sizeof(vertices[0]), (void*)(sizeof(float) * 2));
+    glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE, sizeof(triangle[0]), (void*)(sizeof(float) * 2));
 
     float speed = 0.01f;
     float offsetX = 0;
@@ -171,15 +178,30 @@ int main(void)
         mat4x4_identity(m);
         mat4x4_rotate_Z(m, m, rotate_offset);
 
-        offsetX -= (float)glfwGetTime() * moving_direction_x * speed;
-        offsetY -= (float)glfwGetTime() * moving_direction_y * speed;
+        offsetX -= moving_direction_x * speed;
+        offsetY -= moving_direction_y * speed;
         mat4x4_ortho(p, -ratio + offsetX, ratio + offsetX, -1.f + offsetY, 1.f + offsetY, 1.f, -1.f);
 
-        mat4x4_add(mvp, p, m);
+        //mat4x4_mul(mvp, p, m);
 
         glUseProgram(program);
-        glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)mvp);
-        glDrawArrays(GL_QUADS, 0, 4);
+        glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)m);
+
+        glEnableVertexAttribArray(vpos_location);
+        glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE, sizeof(squad[0]), (void*)0);
+        glEnableVertexAttribArray(vcol_location);
+        glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE, sizeof(squad[0]), (void*)(sizeof(float) * 2));
+        glDrawArrays(GL_QUADS,0, 4);
+        glDisableVertexAttribArray(vpos_location);
+
+        glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)p);
+
+        glEnableVertexAttribArray(vpos_location);
+        glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE, sizeof(triangle[0]), (void*)0);
+        glEnableVertexAttribArray(vcol_location);
+        glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE, sizeof(triangle[0]), (void*)(sizeof(float) * 2));
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDisableVertexAttribArray(vpos_location);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
