@@ -146,7 +146,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\glad\src\glad.c" />
-    <ClCompile Include="Lab2.cpp" />
     <ClCompile Include="Lab3.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>

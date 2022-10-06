@@ -2,40 +2,43 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
-#include "./linmath.h"
+#include "../linmath.h"
 
 #include <stdlib.h>
 #include <stdio.h>
 
 static const struct
 {
-    float x, y;
+    float x, y, z;
     float r, g, b;
-} squad[4] =
+} squad[8] =
 {
-    { -0.2f, -0.2f, 1.f, 1.f, 0.f },
-    {  0.2f, -0.2f, 0.f, 1.f, 1.f },
-    {  0.2f, 0.2f, 1.f, 0.f, 0.f },
-    { -0.2f, 0.2f, 0.f, 1.f, 1.f }
-},
-triangle[3] =
-{
-    { -0.6f, -0.6f, 1.f, 1.f, 0.f },
-    {  0.6f, -0.6f, 0.f, 1.f, 1.f },
-    {  0, 0.6f, 1.f, 0.f, 0.f }
+    { -0.2f, -0.2f, 0, 1.f, 1.f, 0.f },
+    {  0.2f, -0.2f, 0, 0.f, 1.f, 1.f },
+    {  0.2f, 0.2f, 0, 1.f, 0.f, 0.f },
+    { -0.2f, 0.2f, 0, 0.f, 1.f, 1.f },
+
+    { -0.2f, -0.2f, 1, 1.f, 1.f, 0.f },
+    {  0.2f, -0.2f, 1, 0.f, 1.f, 1.f },
+    {  0.2f, 0.2f, 1, 1.f, 0.f, 0.f },
+    { -0.2f, 0.2f, 1, 0.f, 1.f, 1.f }
 };
+
 
 static const char* vertex_shader_text =
 "#version 110\n"
 "uniform mat4 MVP;\n"
+"uniform mat4 projectoin;\n"
+"uniform mat4 view;\n"
 "attribute vec3 vCol;\n"
-"attribute vec2 vPos;\n"
+"attribute vec3 vPos;\n"
 "varying vec3 color;\n"
 "void main()\n"
 "{\n"
-"    gl_Position = MVP * vec4(vPos, 0.0, 1.0);\n"
+"    gl_Position = projection * view*MVP * vec4(vPos, 1.0);\n"
 "    color = vCol;\n"
 "}\n";
+
 
 static const char* fragment_shader_text =
 "#version 110\n"
@@ -53,7 +56,7 @@ static void error_callback(int error, const char* description)
 
 int moving_direction_x = 0;
 int moving_direction_y = 0;
-int rotation = 0;
+float fov = 45.f;
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -82,18 +85,15 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
 
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
-        rotation = 1;
-    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-        rotation = -1;
-    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
-        rotation -= 1;
-    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
-        rotation -= -1;
+    if (fov >= 1.0f && fov <= 45.0f)
+        fov -= yoffset;
+    if (fov <= 1.0f)
+        fov = 1.0f;
+    if (fov >= 45.0f)
+        fov = 45.0f;
 }
-
 
 int main(void)
 {
@@ -118,8 +118,7 @@ int main(void)
     }
 
     glfwSetKeyCallback(window, key_callback);
-    glfwSetMouseButtonCallback(window, mouse_button_callback);
-
+    glfwSetScrollCallback(window, scroll_callback);
     glfwMakeContextCurrent(window);
     gladLoadGL();
     glfwSwapInterval(1);
@@ -159,42 +158,62 @@ int main(void)
 
     while (!glfwWindowShouldClose(window))
     {
+        //moving
         vec3_mul_cross(cameraX, cameraPos, up);
         vec3_norm(cameraX, cameraX);
         vec3_mul_cross(cameraY, cameraPos, cameraX);
         vec3_norm(cameraY, cameraY);
 
+        vec3_scale(cameraX, cameraX, moving_direction_x);
+        vec3_scale(cameraY, cameraY, moving_direction_x);
         
-        vec3 add = {cameraX * moving_direction_x, cameraY*moving_direction_y,0};
-
+        vec3_add(offset, cameraX, cameraY);
         vec3_add(cameraPos, cameraPos, offset);
         
         mat4x4_look_at(look_at, cameraPos, aim, up);
 
         float ratio;
         int width, height;
-        mat4x4 m, p, mvp;
+        mat4x4 m, projection;
 
         glfwGetFramebufferSize(window, &width, &height);
         ratio = width / (float)height;
 
+        mat4x4_ortho(m, -1.f, 1.f, -1.f, 1.f, 1.f, -1.f);
+
+        glfwGetFramebufferSize(window, &width, &height);
+        ratio = width / (float)height;
+
+        mat4x4_perspective(projection, fov, width / height, 0.1f, 100.0f);
+
+        /*mat4x4_mul(projection, projection, look_at);
+        mat4x4_mul(m, projection, m);*/
+
         glViewport(0, 0, width, height);
+        glEnable(GL_DEPTH_TEST);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        mvp_location = glGetUniformLocation(program, "MVP");
+        mvp_location = glGetUniformLocation(program, "view");
+        mvp_location = glGetUniformLocation(program, "projection");
 
         glUseProgram(program);
         glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)m);
-
+        glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)look_at);
+        glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)projection);
+        
+         
         glBindBuffer(GL_ARRAY_BUFFER, squad_vertex_buffer);
         glEnableVertexAttribArray(vpos_location);
-        glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE, sizeof(squad[0]), (void*)0);
+        glVertexAttribPointer(vpos_location, 3, GL_FLOAT, GL_FALSE, sizeof(squad[0]), (void*)0);
         glEnableVertexAttribArray(vcol_location);
-        glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE, sizeof(squad[0]), (void*)(sizeof(float) * 2));
+        glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE, sizeof(squad[0]), (void*)(sizeof(float) * 3));
 
-        glDrawArrays(GL_QUADS, 0, 4);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
         glDisableVertexAttribArray(vpos_location);
         glDisableVertexAttribArray(vcol_location);
 
+        glBindVertexArray(0);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

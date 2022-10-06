@@ -2,7 +2,7 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
-#include "./linmath.h"
+#include "../linmath.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -95,7 +95,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 }
 
 
-int main(void)
+int main1(void)
 {
     GLFWwindow* window;
     GLuint squad_vertex_buffer, triangle_vertex_buffer, vertex_shader, fragment_shader, program;
