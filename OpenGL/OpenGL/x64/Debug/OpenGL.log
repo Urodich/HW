@@ -1,10 +1,10 @@
 ﻿  Lab3.cpp
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(585,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,51): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,20): warning C4244: инициализация: преобразование "double" в "const float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Lab3.cpp(91,16): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Lab3.cpp(167,38): warning C4244: аргумент: преобразование "int" в "const float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Lab3.cpp(168,38): warning C4244: аргумент: преобразование "int" в "const float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Lab3.cpp(187,51): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-  OpenGL.vcxproj -> C:\Users\Владелец\Desktop\домашка\HW\OpenGL\x64\Debug\OpenGL.exe
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(585,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(602,51): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(602,20): warning C4244: инициализация: преобразование "double" в "const float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\OpenGL\Lab3.cpp(133,16): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\OpenGL\Lab3.cpp(214,38): warning C4244: аргумент: преобразование "int" в "const float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\OpenGL\Lab3.cpp(215,38): warning C4244: аргумент: преобразование "int" в "const float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\OpenGL\Lab3.cpp(235,51): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+  OpenGL.vcxproj -> C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\x64\Debug\OpenGL.exe
