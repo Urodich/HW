@@ -6,6 +6,7 @@ from nltk.stem import SnowballStemmer
 PS=SnowballStemmer(language="russian")
 tokens=[]
 Stops=set()
+symbols=['.', ',', '!', '?', '`', ' - ', ':', ';', '"', '']
 
 def Start():
     with open("./lab2/stop-ru.txt","r",encoding="utf8") as f:
@@ -21,6 +22,8 @@ def Start():
     #remove stop-words
     for i in texts:
         for word in i:
+            for sym in symbols:
+                word.replace(sym,"")
             if word in Stops:
                 i.remove(word)
     for text in texts:
