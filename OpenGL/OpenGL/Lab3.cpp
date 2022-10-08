@@ -157,7 +157,7 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-    window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL);
+    window = glfwCreateWindow(640, 480, "Lab3", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -192,19 +192,26 @@ int main(void)
     glDeleteShader(vertex_shader);
     glDeleteShader(fragment_shader);
 
-    //mvp_location = glGetUniformLocation(program, "MVP");
     vpos_location = glGetAttribLocation(program, "vPos");
     vcol_location = glGetAttribLocation(program, "vCol");
+
+    mvp_location = glGetUniformLocation(program, "MVP");
+    view_location = glGetUniformLocation(program, "view");
+    projection_location = glGetUniformLocation(program, "projection");
 
     vec3 cameraX,cameraY,offset,cameraPos = { 0,0,3 };
     vec3 aim = { 0,0,0 };
     vec3 up = { 0,1,0 };
-    mat4x4 look_at;
+    
 
 
 
     while (!glfwWindowShouldClose(window))
     {
+        float ratio;
+        int width, height;
+        mat4x4 m, projection, look_at;
+
         //moving
         vec3_mul_cross(cameraX, cameraPos, up);
         vec3_norm(cameraX, cameraX);
@@ -219,14 +226,12 @@ int main(void)
         
         mat4x4_look_at(look_at, cameraPos, aim, up);
 
-        float ratio;
-        int width, height;
-        mat4x4 m, projection;
 
         glfwGetFramebufferSize(window, &width, &height);
         ratio = width / (float)height;
 
         mat4x4_identity(m);
+        mat4x4_translate(m, 0, 0, 0);
         //mat4x4_ortho(m, -1.f, 1.f, -1.f, 1.f, 1.f, -1.f);
 
         glfwGetFramebufferSize(window, &width, &height);
@@ -241,34 +246,28 @@ int main(void)
         glEnable(GL_DEPTH_TEST);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        mvp_location = glGetUniformLocation(program, "MVP");
-        view_location = glGetUniformLocation(program, "view");
-        projection_location = glGetUniformLocation(program, "projection");
-
         glUseProgram(program);
         glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)m);
         glUniformMatrix4fv(view_location, 1, GL_FALSE, (const GLfloat*)look_at);
         glUniformMatrix4fv(projection_location, 1, GL_FALSE, (const GLfloat*)projection);
         
          
-        glBindBuffer(GL_ARRAY_BUFFER, squad_vertex_buffer);
+        //glBindBuffer(GL_ARRAY_BUFFER, squad_vertex_buffer);
         /*glEnableVertexAttribArray(vpos_location);
         glVertexAttribPointer(vpos_location, 3, GL_FLOAT, GL_FALSE, sizeof(squad[0]), (void*)0);
         glEnableVertexAttribArray(vcol_location);
         glVertexAttribPointer(vcol_location, 2, GL_FLOAT, GL_FALSE, sizeof(squad[0]), (void*)(sizeof(float) * 3));*/
 
-        // Position attribute
         glVertexAttribPointer(vpos_location, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
         glEnableVertexAttribArray(vpos_location);
-        // TexCoord attribute
         glVertexAttribPointer(vcol_location, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
         glEnableVertexAttribArray(vcol_location);
 
         glDrawArrays(GL_TRIANGLES, 0, 36);
-        glDisableVertexAttribArray(vpos_location);
-        glDisableVertexAttribArray(vcol_location);
+        /*glDisableVertexAttribArray(vpos_location);
+        glDisableVertexAttribArray(vcol_location);*/
 
-        glBindVertexArray(0);
+        //glBindVertexArray(0);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
