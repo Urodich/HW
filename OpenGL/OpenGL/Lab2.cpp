@@ -1,11 +1,6 @@
-#include <glad/glad.h>
-#define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
+#include"Header.h"
 
-#include "../linmath.h"
 
-#include <stdlib.h>
-#include <stdio.h>
 
 static const struct
 {
@@ -45,17 +40,11 @@ static const char* fragment_shader_text =
 "    gl_FragColor = vec4(color, 1.0);\n"
 "}\n";
 
-static void error_callback(int error, const char* description)
-{
-    fprintf(stderr, "Error: %s\n", description);
-}
 
 
-int moving_direction_x = 0;
-int moving_direction_y = 0;
-int rotation = 0;
 
-static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+
+static void key_callback2(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     if (key == GLFW_KEY_DOWN)
         if (action == GLFW_PRESS)
@@ -95,8 +84,11 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 }
 
 
-int main1(void)
+void lab2(void)
 {
+    rotation = 0;
+    moving_direction_x = 0;
+    moving_direction_y = 0;
     GLFWwindow* window;
     GLuint squad_vertex_buffer, triangle_vertex_buffer, vertex_shader, fragment_shader, program;
     GLint mvp_location, vpos_location, vcol_location;
@@ -117,7 +109,7 @@ int main1(void)
         exit(EXIT_FAILURE);
     }
 
-    glfwSetKeyCallback(window, key_callback);
+    glfwSetKeyCallback(window, key_callback2);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
 
     glfwMakeContextCurrent(window);
