@@ -1,22 +1,7 @@
 #include "Header.h"
 
-static const struct
-{
-    float x, y, z;
-    float r, g, b;
-} ssquad[8] =
-{
-    { -0.2f, -0.2f, 0, 1.f, 1.f, 0.f },
-    {  0.2f, -0.2f, 0, 0.f, 1.f, 1.f },
-    {  0.2f, 0.2f, 0, 1.f, 0.f, 0.f },
-    { -0.2f, 0.2f, 0, 0.f, 1.f, 1.f },
 
-    { -0.2f, -0.2f, 1, 1.f, 1.f, 0.f },
-    {  0.2f, -0.2f, 1, 0.f, 1.f, 1.f },
-    {  0.2f, 0.2f, 1, 1.f, 0.f, 0.f },
-    { -0.2f, 0.2f, 1, 0.f, 1.f, 1.f }
-};
-float squad[] = {
+static float squad[] = {
         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
          0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
          0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
@@ -175,7 +160,7 @@ static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
         fov = 45.0f;
 }
 
-void init() {
+static void init() {
     glfwSetErrorCallback(error_callback);
 
 
@@ -199,7 +184,7 @@ void init() {
     glfwSwapInterval(1);
 }
 
-void shaders() {
+static void shaders() {
     vertex_shader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex_shader, 1, &vertex_shader_text, NULL);
     glCompileShader(vertex_shader);

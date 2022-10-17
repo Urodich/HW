@@ -116,13 +116,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\include;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\.circleci;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\inc;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\include;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\.circleci;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\lib-vc2022;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\src;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\lib-vc2022;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\src;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -133,7 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\include;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\.circleci;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\inc;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\include;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\.circleci;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,11 +141,15 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\lib-vc2022;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\src;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\lib-vc2022;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\src;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\glad\src\glad.c" />
+    <ClCompile Include="..\SOIL\src\image_DXT.c" />
+    <ClCompile Include="..\SOIL\src\image_helper.c" />
+    <ClCompile Include="..\SOIL\src\SOIL.c" />
+    <ClCompile Include="..\SOIL\src\stb_image_aug.c" />
     <ClCompile Include="Lab2.cpp" />
     <ClCompile Include="Lab3.cpp" />
     <ClCompile Include="Lab4.cpp" />
@@ -155,6 +159,12 @@
   <ItemGroup>
     <ClInclude Include="..\glad\include\glad\glad.h" />
     <ClInclude Include="..\linmath\linmath.h" />
+    <ClInclude Include="..\SOIL\inc\SOIL\image_DXT.h" />
+    <ClInclude Include="..\SOIL\inc\SOIL\image_helper.h" />
+    <ClInclude Include="..\SOIL\inc\SOIL\SOIL.h" />
+    <ClInclude Include="..\SOIL\inc\SOIL\stbi_DDS_aug.h" />
+    <ClInclude Include="..\SOIL\inc\SOIL\stbi_DDS_aug_c.h" />
+    <ClInclude Include="..\SOIL\inc\SOIL\stb_image_aug.h" />
     <ClInclude Include="Header.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

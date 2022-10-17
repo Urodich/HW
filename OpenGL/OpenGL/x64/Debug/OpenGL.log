@@ -1,7 +1,45 @@
-﻿  Lab3.cpp
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(585,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,51): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,20): warning C4244: инициализация: преобразование "double" в "const float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Lab3.cpp(171,23): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
-  OpenGL.vcxproj -> C:\Users\Владелец\Desktop\домашка\HW\OpenGL\x64\Debug\OpenGL.exe
+﻿  image_DXT.c
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\image_DXT.c(92,26): warning C4090: функция: разные квалификаторы "const"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\image_DXT.c(92,16): error C2198: fopen_s: слишком мало аргументов для вызова
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\image_DXT.c(92,33): warning C4047: =: "FILE *" отличается по уровням косвенного обращения от "errno_t"
+  image_helper.c
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\image_helper.c(325,22): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\image_helper.c(366,13): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\image_helper.c(373,20): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\image_helper.c(415,13): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\image_helper.c(422,20): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+  SOIL.c
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\SOIL.c(30,11): fatal error C1083: Не удается открыть файл включение: GL/glx.h: No such file or directory,
+  stb_image_aug.c
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(126,30): warning C4090: функция: разные квалификаторы "const"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(126,21): error C2198: fopen_s: слишком мало аргументов для вызова
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(126,1): warning C4047: инициализация: "FILE *" отличается по уровням косвенного обращения от "errno_t"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(200,14): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(252,30): warning C4090: функция: разные квалификаторы "const"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(252,21): error C2198: fopen_s: слишком мало аргументов для вызова
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(252,1): warning C4047: инициализация: "FILE *" отличается по уровням косвенного обращения от "errno_t"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(1506,30): warning C4090: функция: разные квалификаторы "const"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(1506,21): error C2198: fopen_s: слишком мало аргументов для вызова
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(1506,1): warning C4047: инициализация: "FILE *" отличается по уровням косвенного обращения от "errno_t"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(2343,30): warning C4090: функция: разные квалификаторы "const"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(2343,21): error C2198: fopen_s: слишком мало аргументов для вызова
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(2343,1): warning C4047: инициализация: "FILE *" отличается по уровням косвенного обращения от "errno_t"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(2658,30): warning C4090: функция: разные квалификаторы "const"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(2658,21): error C2198: fopen_s: слишком мало аргументов для вызова
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(2658,1): warning C4047: инициализация: "FILE *" отличается по уровням косвенного обращения от "errno_t"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(2944,14): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(3158,30): warning C4090: функция: разные квалификаторы "const"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(3158,21): error C2198: fopen_s: слишком мало аргументов для вызова
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(3158,1): warning C4047: инициализация: "FILE *" отличается по уровням косвенного обращения от "errno_t"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(3497,30): warning C4090: функция: разные квалификаторы "const"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(3497,21): error C2198: fopen_s: слишком мало аргументов для вызова
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(3497,1): warning C4047: инициализация: "FILE *" отличается по уровням косвенного обращения от "errno_t"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(3593,30): warning C4090: функция: разные квалификаторы "const"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(3593,21): error C2198: fopen_s: слишком мало аргументов для вызова
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src\stb_image_aug.c(3593,1): warning C4047: инициализация: "FILE *" отличается по уровням косвенного обращения от "errno_t"
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\inc\SOIL\stbi_DDS_aug_c.h(362,19): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\inc\SOIL\stbi_DDS_aug_c.h(366,19): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\inc\SOIL\stbi_DDS_aug_c.h(390,19): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\inc\SOIL\stbi_DDS_aug_c.h(427,19): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\inc\SOIL\stbi_DDS_aug_c.h(498,14): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Создание кода...

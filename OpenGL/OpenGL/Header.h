@@ -1,11 +1,13 @@
 #pragma once
 #define GLFW_INCLUDE_NONE
 
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "../linmath.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "../SOIL/inc/SOIL/SOIL.h"
 
 static int moving_direction_x;
 static int moving_direction_y;
