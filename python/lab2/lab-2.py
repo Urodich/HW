@@ -6,7 +6,7 @@ from nltk.stem import SnowballStemmer
 PS=SnowballStemmer(language="russian")
 tokens=[]
 Stops=set()
-symbols=['.', ',', '!', '?', '`', ' - ', ':', ';', '"', '']
+symbols=['.', ',', '!', '?', '`', ' - ', ':', ';', '"', '','1','2','3,','4','5','6','7','8','9','0']
 
 def Start():
     with open("./lab2/stop-ru.txt","r",encoding="utf8") as f:
@@ -46,9 +46,11 @@ def Search():
     for word in search:
             if word in Stops:
                 search.remove(word)
+            for sym in symbols:
+                word.replace(sym,"")
     for i in range(len(search)):
         search[i]=PS.stem(search[i])
-
+    print(search)
     rate=[0]*len(tokens)
 
     for i in range(len(tokens)):
