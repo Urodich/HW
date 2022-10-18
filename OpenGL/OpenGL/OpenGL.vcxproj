@@ -116,13 +116,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\inc;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\include;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\.circleci;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\SOIL\inc;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\SOIL\inc\SOIL;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\inc;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\include;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\.circleci;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\lib-vc2022;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\src;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\SOIL\src;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\lib-vc2022;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\src;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -133,7 +134,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\inc;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\include;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\.circleci;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\SOIL\inc;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\SOIL\inc\SOIL;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\inc;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\include;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\.circleci;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\include;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,7 +143,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\lib-vc2022;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\src;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\SOIL\src;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\SOIL\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\glad\src;C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\GL\GLFW\lib-vc2022;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\glad\src;C:\Users\Владелец\Desktop\домашка\HW\OpenGL\GL\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

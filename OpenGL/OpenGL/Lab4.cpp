@@ -46,7 +46,7 @@ static float squad[] = {
 };
 
 static const char* vertex_shader_text =
-"#version 110\n"
+"#version 330 core\n"
 
 "uniform mat4 MVP;\n"
 "uniform mat4 projection;\n"
@@ -54,8 +54,8 @@ static const char* vertex_shader_text =
 
 "out vec2 TexCoord;\n"
 
-"attribute vec2 vCol;\n"
-"attribute vec2 texCoord;\n"
+"layout (location = 0) in vec3 vPos;\n"
+"layout (location = 2) in vec2 texCoord;\n"
 
 "void main()\n"
 "{\n"
@@ -66,9 +66,21 @@ static const char* vertex_shader_text =
 //
 
 static const char* fragment_shader_text =
-"#version 110\n"
-"varying vec3 color;\n"
+"#version 330 core\n"
+"in vec2 TexCoord;\n"
+"out vec4 color;\n"
+"uniform sampler2D ourTexture1;\n"
+"uniform sampler2D ourTexture2;\n"
 
+"void main()\n"
+"{\n"
+"    color = mix(texture(ourTexture1, TexCoord), texture(ourTexture2, TexCoord), 0.2);\n"
+"}\n";
+
+static const char* fragment_shader_text1 =
+"#version 110\n"
+
+"varying vec2 TexCoord;\n"
 "uniform sampler2D ourTexture1;\n"
 "uniform sampler2D ourTexture2;\n"
 
@@ -142,7 +154,7 @@ static void init() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
-    window = glfwCreateWindow(640, 480, "Lab3", NULL, NULL);
+    window = glfwCreateWindow(640, 480, "Lab4", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -202,6 +214,29 @@ static void camera() {
     mat4x4_perspective(projection, fov, ratio, 0.1f, 100.0f);
 }
 
+GLuint create_texture(const char* path) {
+    GLuint texture;
+    // ====================
+    // Texture 1
+    // ====================
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture); // All upcoming GL_TEXTURE_2D operations now have effect on our texture object
+    // Set our texture parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // Set texture filtering
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // Load, create texture and generate mipmaps
+    int width, height;
+    unsigned char* image = SOIL_load_image(path, &width, &height, 0, SOIL_LOAD_RGB);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    SOIL_free_image_data(image);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    return texture;
+}
+
 void lab4() {
     moving_direction_x = 0;
     moving_direction_y = 0;
@@ -209,11 +244,8 @@ void lab4() {
 
     init();
 
-    GLuint texture1;
-    GLuint texture2;
-    // ====================
-    // Texture 1
-    // ====================
+    GLuint texture1, texture2, texture3;
+
     glGenTextures(1, &texture1);
     glBindTexture(GL_TEXTURE_2D, texture1); // All upcoming GL_TEXTURE_2D operations now have effect on our texture object
     // Set our texture parameters
@@ -224,36 +256,54 @@ void lab4() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     // Load, create texture and generate mipmaps
     int width, height;
-    unsigned char* image = SOIL_load_image("container.jpg", &width, &height, 0, SOIL_LOAD_RGB);
+    unsigned char* image = SOIL_load_image("./OpenGL/textures/1.jpg", &width, &height, 0, SOIL_LOAD_RGB);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
     glGenerateMipmap(GL_TEXTURE_2D);
     SOIL_free_image_data(image);
-    glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture when done, so we won't accidentily mess up our texture.
-    // ===================
-    // Texture 2
-    // ===================
+    glBindTexture(GL_TEXTURE_2D, 0);
+
     glGenTextures(1, &texture2);
-    glBindTexture(GL_TEXTURE_2D, texture2);
+    glBindTexture(GL_TEXTURE_2D, texture2); // All upcoming GL_TEXTURE_2D operations now have effect on our texture object
     // Set our texture parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     // Set texture filtering
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     // Load, create texture and generate mipmaps
-    image = SOIL_load_image("awesomeface.png", &width, &height, 0, SOIL_LOAD_RGB);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+    int Iwidth, Iheight;
+    image = SOIL_load_image("./OpenGL/textures/2.jpg", &Iwidth, &Iheight, 0, SOIL_LOAD_RGB);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Iwidth, Iheight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
     glGenerateMipmap(GL_TEXTURE_2D);
     SOIL_free_image_data(image);
     glBindTexture(GL_TEXTURE_2D, 0);
+
+    /*texture1 = create_texture("./OpenGL/textures/1.jpg");
+    texture2 = create_texture("./OpenGL/textures/2.jpg");*/
+
     glGenBuffers(1, &squad_vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, squad_vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(squad), squad, GL_STATIC_DRAW);
 
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture1);
+    glUniform1i(glGetUniformLocation(program, "ourTexture1"), 0);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, texture2);
+    glUniform1i(glGetUniformLocation(program, "ourTexture2"), 1);
+
     shaders();
 
-    vpos_location = glGetAttribLocation(program, "vPos");
-    vcol_location = glGetAttribLocation(program, "texCoord");
+    glUseProgram(program);
+    
+
+    /*vpos_location = glGetAttribLocation(program, "vPos");
+    vcol_location = glGetAttribLocation(program, "texCoord");*/
 
     mvp_location = glGetUniformLocation(program, "MVP");
     view_location = glGetUniformLocation(program, "view");
@@ -265,14 +315,9 @@ void lab4() {
         camera();
 
         glViewport(0, 0, width, height);
-        //glEnable(GL_DEPTH_TEST);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glUseProgram(program);
-        glVertexAttribPointer(vpos_location, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(vpos_location);
-        glVertexAttribPointer(vcol_location, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-        glEnableVertexAttribArray(vcol_location);
+        
 
         glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)m);
         glUniformMatrix4fv(view_location, 1, GL_FALSE, (const GLfloat*)look_at);
