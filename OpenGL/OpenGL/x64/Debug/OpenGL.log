@@ -3,6 +3,6 @@ C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(585
 C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
 C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,51): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
 C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,20): warning C4244: инициализация: преобразование "double" в "const float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Lab4.cpp(142,24): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Lab4.cpp(249,32): warning C4101: texture3: неиспользованная локальная переменная
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Lab4.cpp(131,24): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
+C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Lab4.cpp(239,32): warning C4101: texture3: неиспользованная локальная переменная
   OpenGL.vcxproj -> C:\Users\Владелец\Desktop\домашка\HW\OpenGL\x64\Debug\OpenGL.exe

@@ -104,6 +104,7 @@ static const char* vertex_shader_text =
 
 //
 
+
 static const char* fragment_shader_text =
 "#version 330 core\n"
 "varying vec3 color;\n"
