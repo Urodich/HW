@@ -53,7 +53,7 @@ static const char* vertex_shader_text =
 "uniform mat4 view;\n"
 
 "out vec2 TexCoord;\n"
-"out int indx;\n"
+"out float indx;\n"
 
 "layout (location = 0) in vec3 vPos;\n"
 "layout (location = 2) in vec2 texCoord;\n"
@@ -63,7 +63,7 @@ static const char* vertex_shader_text =
 "{\n"
 "    gl_Position = projection * view * MVP * vec4(vPos, 1.0);\n"
 "    TexCoord = vec2(texCoord.x, 1.0 - texCoord.y);\n"
-"    indx = int(ind);\n"
+"    indx = ind;\n"
 "}\n";
 
 //
@@ -73,16 +73,16 @@ static const char* fragment_shader_text =
 "#version 330 core\n"
 
 "in vec2 TexCoord;\n"
-//"in int indx;\n"
+"in float indx;\n"
 "out vec4 color;\n"
 
-//"uniform sampler2D Textures[3];\n"
+"uniform sampler2D Textures[3];\n"
 //"uniform sampler2D ourTexture1;\n"
 //"uniform sampler2D ourTexture2;\n"
 
 "void main()\n"
 "{\n"
-"    color = vec4(1.0, 1.0, 1.0, 1.0);\n"//texture(Textures[indx], TexCoord);\n"
+"    color = vec4(indx/3,indx/3,indx/3,1.0);"//texture(Textures[indx], TexCoord);\n"
 "}\n";
 
 
@@ -245,8 +245,8 @@ void lab4() {
     GLuint texture1, texture2, texture3;
 
     texture1 = create_texture("../OpenGL/textures/1.jpg");
-    texture2 = create_texture("../OpenGL/textures/2.jpg");
-    texture3 = create_texture("../OpenGL/textures/2.jpg");
+    texture2 = create_texture("../OpenGL/textures/1.jpg");
+    texture3 = create_texture("../OpenGL/textures/1.jpg");
 
     glGenBuffers(1, &squad_vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, squad_vertex_buffer);
@@ -256,18 +256,19 @@ void lab4() {
 
     vpos_location = glGetAttribLocation(program, "vPos");
     vcol_location = glGetAttribLocation(program, "texCoord");
-    //texture_indx_location = glGetAttribLocation(program, "ind");
+    texture_indx_location = glGetAttribLocation(program, "ind");
+
+    int tex[] = { 0,1,2 };
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture1);
-    glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, texture2);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, texture1);
     glActiveTexture(GL_TEXTURE2);
     glBindTexture(GL_TEXTURE_2D, texture3);
+    //glUniform1iv(glGetUniformLocation(program, "Textures"), 3, tex);
     glUniform3i(glGetUniformLocation(program, "Textures"), 0,1,2);
-    /*glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, texture2);
-    glUniform1i(glGetUniformLocation(program, "ourTexture2"), 1);*/
+
 
     mvp_location = glGetUniformLocation(program, "MVP");
     view_location = glGetUniformLocation(program, "view");
@@ -287,8 +288,8 @@ void lab4() {
         glEnableVertexAttribArray(vpos_location);
         glVertexAttribPointer(vcol_location, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(vcol_location);
-        /*glVertexAttribPointer(texture_indx_location, 1, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(5 * sizeof(float)));
-        glEnableVertexAttribArray(texture_indx_location);*/
+        glVertexAttribPointer(texture_indx_location, 1, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(5 * sizeof(float)));
+        glEnableVertexAttribArray(texture_indx_location);
 
         glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)m);
         glUniformMatrix4fv(view_location, 1, GL_FALSE, (const GLfloat*)look_at);
