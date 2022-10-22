@@ -7,7 +7,7 @@ static float squad[] = {
          0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,
          0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1.0f,
         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 1.0f,
-         0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1.0f,
 
         -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f,
          0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 1.0f,
@@ -45,6 +45,54 @@ static float squad[] = {
         -0.5f,  0.5f, -0.5f,  0.0f, 5.0f, 3.0f
 };
 
+static struct {
+    float x, y, z, a, b;
+    int ind;
+}
+squad1[] = {
+        {-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1},
+        {0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 1 },
+        {0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1},
+        {0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 1},
+        {-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 1},
+        {-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 1},
+
+        {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1 },
+        {0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 1},
+        {0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1},
+        {0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 1},
+        {-0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 1},
+        {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1},
+
+        {-0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 2},
+        {-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 2},
+        {-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 2},
+        {-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 2},
+        {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 2},
+        {-0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 2},
+
+        {0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 2},
+        {0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 2},
+        {0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 2},
+        {0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 2},
+        {0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 2},
+        {0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 2},
+
+        {-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 3},
+        {0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 3},
+        {0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 3},
+        {0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 3},
+        {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 3},
+        {-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 3},
+
+        {-0.5f,  0.5f, -0.5f,  0.0f, 5.0f, 3},
+        {0.5f,  0.5f, -0.5f,  5.0f, 5.0f, 3},
+        {0.5f,  0.5f,  0.5f,  5.0f, 0.0f, 3},
+        {0.5f,  0.5f,  0.5f,  5.0f, 0.0f, 3},
+        {0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 3},
+        {-0.5f,  0.5f, -0.5f,  0.0f, 5.0f, 3}
+};
+
 static const char* vertex_shader_text =
 "#version 330 core\n"
 
@@ -53,17 +101,17 @@ static const char* vertex_shader_text =
 "uniform mat4 view;\n"
 
 "out vec2 TexCoord;\n"
-"out float indx;\n"
+//"out int indx;\n"
 
 "layout (location = 0) in vec3 vPos;\n"
 "layout (location = 2) in vec2 texCoord;\n"
-"layout (location = 3) in float ind;\n"
+//"layout (location = 3) in int ind;\n"
 
 "void main()\n"
 "{\n"
 "    gl_Position = projection * view * MVP * vec4(vPos, 1.0);\n"
 "    TexCoord = vec2(texCoord.x, 1.0 - texCoord.y);\n"
-"    indx = ind;\n"
+//"    indx = ind;\n"
 "}\n";
 
 //
@@ -82,7 +130,8 @@ static const char* fragment_shader_text =
 
 "void main()\n"
 "{\n"
-"    color = vec4(indx/3,indx/3,indx/3,1.0);"//texture(Textures[indx], TexCoord);\n"
+"    int i=int(indx);"  
+"    color = texture(Textures[1], TexCoord);\n"
 "}\n";
 
 
@@ -239,14 +288,13 @@ void lab4() {
     moving_direction_x = 0;
     moving_direction_y = 0;
 
-
     init();
 
     GLuint texture1, texture2, texture3;
 
     texture1 = create_texture("../OpenGL/textures/1.jpg");
-    texture2 = create_texture("../OpenGL/textures/1.jpg");
-    texture3 = create_texture("../OpenGL/textures/1.jpg");
+    texture2 = create_texture("../OpenGL/textures/4.jpg");
+    texture3 = create_texture("../OpenGL/textures/3.jpg");
 
     glGenBuffers(1, &squad_vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, squad_vertex_buffer);
@@ -258,29 +306,30 @@ void lab4() {
     vcol_location = glGetAttribLocation(program, "texCoord");
     texture_indx_location = glGetAttribLocation(program, "ind");
 
-    int tex[] = { 0,1,2 };
+    uint32_t tex[] = { 0,1,2 };
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture2);
-    glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, texture1);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, texture2);
     glActiveTexture(GL_TEXTURE2);
     glBindTexture(GL_TEXTURE_2D, texture3);
-    //glUniform1iv(glGetUniformLocation(program, "Textures"), 3, tex);
-    glUniform3i(glGetUniformLocation(program, "Textures"), 0,1,2);
+    glUniform1uiv(glGetUniformLocation(program, "Textures"), 3, tex);
+    //glUniform3i(glGetUniformLocation(program, "Textures"), 0,1,2);
 
 
     mvp_location = glGetUniformLocation(program, "MVP");
     view_location = glGetUniformLocation(program, "view");
     projection_location = glGetUniformLocation(program, "projection");
 
+    glEnable(GL_DEPTH_TEST);
 
     while (!glfwWindowShouldClose(window))
     {
         camera();
 
         glViewport(0, 0, width, height);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glUseProgram(program);
 
@@ -288,7 +337,7 @@ void lab4() {
         glEnableVertexAttribArray(vpos_location);
         glVertexAttribPointer(vcol_location, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(vcol_location);
-        glVertexAttribPointer(texture_indx_location, 1, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(5 * sizeof(float)));
+        //glVertexAttribPointer(texture_indx_location, 1, GL_UNSIGNED_INT, GL_FALSE, sizeof(squad[0]), (void*)(5 * sizeof(float)));
         glEnableVertexAttribArray(texture_indx_location);
 
         glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)m);
