@@ -125,12 +125,16 @@ static const char* fragment_shader_text1 =
 static GLFWwindow* window;
 static GLuint squad_vertex_buffer, vertex_shader, fragment_shader, program;
 static GLint mvp_location, projection_location, view_location, vpos_location, vcol_location;
-
+static bool perspective=true;
 
 static float fov = 45.f;
 
 static void key_callback3(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+    if (key == GLFW_KEY_P)
+        if (action == GLFW_PRESS)
+            perspective = !perspective;
+
     if (key == GLFW_KEY_DOWN) {
         if (action == GLFW_PRESS)
             moving_direction_y -= 1;
@@ -276,7 +280,9 @@ void lab3(void)
 
         glfwGetFramebufferSize(window, &width, &height);
 
-        mat4x4_perspective(projection, fov, ratio, 0.1f, 100.0f);
+        const float aspect = (float)width / (float)height;
+        if(!perspective) mat4x4_ortho(projection, -1.0f, 1.0, -aspect, aspect, 0.1f, 100.0f);
+        else mat4x4_perspective(projection, fov, ratio, 0.1f, 100.0f);
 
         glViewport(0, 0, width, height);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
