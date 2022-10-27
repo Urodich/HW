@@ -266,7 +266,11 @@ void lab3(void)
         
         vec3_add(offset, cameraX, cameraY);
         
+        float old = vec3_len(cameraPos);
         vec3_add(cameraPos, cameraPos, offset);
+        float cur = vec3_len(cameraPos);
+        vec3_scale(cameraPos, cameraPos, old / cur);
+        mat4x4_look_at(look_at, cameraPos, aim, up);
         
         mat4x4_look_at(look_at, cameraPos, aim, up);
 

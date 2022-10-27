@@ -125,14 +125,14 @@ static const char* fragment_shader_text =
 "out vec4 color;\n"
 
 "uniform sampler2D Texture1;\n"
-"uniform sampler2D Texture2;\n"
-"uniform sampler2D Texture3;\n"
+//"uniform sampler2D Texture2;\n"
+//"uniform sampler2D Texture3;\n"
 
 "void main()\n"
 "{\n"
 //"    sampler2D Textures[3]={Texture1, Texture2, Texture3};\n"
 //"    int i=int(indx);"  
-"    color = mix(texture(Texture1, TexCoord), texture(Texture2, TexCoord), 0.2);\n"
+"    color = texture(Texture1, TexCoord);\n"
 "}\n";
 
 
@@ -244,8 +244,10 @@ static void camera() {
 
     vec3_add(offset, cameraX, cameraY);
 
+    float old = vec3_len(cameraPos);
     vec3_add(cameraPos, cameraPos, offset);
-
+    float cur = vec3_len(cameraPos);
+    vec3_scale(cameraPos, cameraPos, old/cur);
     mat4x4_look_at(look_at, cameraPos, aim, up);
 
 
@@ -261,8 +263,8 @@ static void camera() {
     mat4x4_perspective(projection, fov, ratio, 0.1f, 100.0f);
 }
 
-GLuint create_texture(const char* path) {
-    GLuint texture;
+GLuint create_texture(const char* path, GLuint &texture) {
+    //GLuint texture;
     // ====================
     // Texture 1
     // ====================
@@ -293,9 +295,9 @@ void lab4() {
 
     GLuint texture1, texture2, texture3;
 
-    texture1 = create_texture("../OpenGL/textures/1.jpg");
-    texture2 = create_texture("../OpenGL/textures/4.jpg");
-    texture3 = create_texture("../OpenGL/textures/3.jpg");
+    create_texture("../OpenGL/textures/1.jpg", texture1);
+    create_texture("../OpenGL/textures/4.jpg", texture2);
+    create_texture("../OpenGL/textures/3.jpg", texture3);
 
     glGenBuffers(1, &squad_vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, squad_vertex_buffer);
@@ -309,7 +311,7 @@ void lab4() {
 
     int tex[] = { 0,1,2 };
 
-    glActiveTexture(GL_TEXTURE0);
+    /*glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture1);
     glUniform1i(glGetUniformLocation(program, "Texture1"), 0);
     glActiveTexture(GL_TEXTURE1);
@@ -317,7 +319,7 @@ void lab4() {
     glUniform1i(glGetUniformLocation(program, "Texture2"), 1);
     glActiveTexture(GL_TEXTURE2);
     glBindTexture(GL_TEXTURE_2D, texture3);
-    glUniform1i(glGetUniformLocation(program, "Texture3"), 2);
+    glUniform1i(glGetUniformLocation(program, "Texture3"), 2);*/
     //glUniform1iv(glGetUniformLocation(program, "Textures"), 3, tex);
     //glUniform3i(glGetUniformLocation(program, "Textures"), 0,1,2);
     
@@ -352,6 +354,13 @@ void lab4() {
 
         glBindBuffer(GL_ARRAY_BUFFER, squad_vertex_buffer);
         
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture1);
+        glDrawArrays(GL_TRIANGLES, 0, 12);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        glBindTexture(GL_TEXTURE_2D, texture2);
+        glDrawArrays(GL_TRIANGLES, 0, 24);
+        glBindTexture(GL_TEXTURE_2D, texture3);
         glDrawArrays(GL_TRIANGLES, 0, 36);
 
         glfwSwapBuffers(window);
