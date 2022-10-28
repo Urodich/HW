@@ -152,11 +152,15 @@
     <ClCompile Include="..\SOIL\src\image_helper.c" />
     <ClCompile Include="..\SOIL\src\SOIL.c" />
     <ClCompile Include="..\SOIL\src\stb_image_aug.c" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Lab2.cpp" />
     <ClCompile Include="Lab3.cpp" />
     <ClCompile Include="Lab4.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Lab1.cpp" />
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="RenderEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\glad\include\glad\glad.h" />
@@ -167,7 +171,11 @@
     <ClInclude Include="..\SOIL\inc\SOIL\stbi_DDS_aug.h" />
     <ClInclude Include="..\SOIL\inc\SOIL\stbi_DDS_aug_c.h" />
     <ClInclude Include="..\SOIL\inc\SOIL\stb_image_aug.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="RenderEngine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

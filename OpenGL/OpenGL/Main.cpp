@@ -1,8 +1,9 @@
 #include<iostream>
 #include"Header.h"
+#include "RenderEngine.h"
 using namespace std;
 
-int main() {
+int main1() {
 	char num;
 	cout << "lab number";
 	cin >> num;
@@ -21,4 +22,8 @@ int main() {
 		break;
 	}
 	return 0;
+}
+
+int main() {
+	RenderEngine = new RenderEngine();
 }
