@@ -161,6 +161,7 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="RenderEngine.cpp" />
+    <ClCompile Include="Shaders.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\glad\include\glad\glad.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="..\SOIL\inc\SOIL\stb_image_aug.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="RenderEngine.h" />

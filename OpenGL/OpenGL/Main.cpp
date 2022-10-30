@@ -1,6 +1,7 @@
 #include<iostream>
 #include"Header.h"
 #include "RenderEngine.h"
+#include <thread>
 using namespace std;
 
 int main1() {
@@ -24,6 +25,10 @@ int main1() {
 	return 0;
 }
 
-int main() {
-	RenderEngine = new RenderEngine();
+RenderEngine* RenderEngine::Eng = NULL;
+void main() {
+	
+	RenderEngine* Eng = RenderEngine::GetInstance();
+	Eng->Start();
+    
 }

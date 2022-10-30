@@ -98,7 +98,7 @@ static const char* vertex_shader_text =
 "varying vec3 color;\n"
 "void main()\n"
 "{\n"
-"    gl_Position = projection * view * MVP * vec4(vPos, 1.0);\n"
+"    gl_Position = projection * view * vec4(vPos, 1.0);\n"
 "    color = vec3(vCol, 1.0);\n"
 "}\n";
 

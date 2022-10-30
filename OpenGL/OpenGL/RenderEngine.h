@@ -2,21 +2,74 @@
 #include "Header.h"
 #include "Object.h"
 #include "Camera.h"
+#include "Light.h"
 #include <vector>
+#include <thread>
 
 using namespace std;
+
+static Vertices squad[] = {
+    {-0.5f, -0.5f, -0.5f,  0.0f, 0.0f},
+    {0.5f, -0.5f, -0.5f,  1.0f, 0.0f},
+    {0.5f,  0.5f, -0.5f,  1.0f, 1.0f},
+    {0.5f,  0.5f, -0.5f,  1.0f, 1.0f},
+    {-0.5f,  0.5f, -0.5f,  0.0f, 1.0f},
+    {-0.5f, -0.5f, -0.5f,  0.0f, 0.0f},
+
+    {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f},
+    {0.5f, -0.5f,  0.5f,  1.0f, 0.0f},
+    {0.5f,  0.5f,  0.5f,  1.0f, 1.0f,},
+    {0.5f,  0.5f,  0.5f,  1.0f, 1.0f,},
+    {-0.5f,  0.5f,  0.5f,  0.0f, 1.0f},
+    {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f},
+
+    {-0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+    {-0.5f,  0.5f, -0.5f,  1.0f, 1.0f},
+    {-0.5f, -0.5f, -0.5f,  0.0f, 1.0f},
+    {-0.5f, -0.5f, -0.5f,  0.0f, 1.0f},
+    {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f},
+    {-0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+
+    {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+    {0.5f,  0.5f, -0.5f,  1.0f, 1.0f},
+    {0.5f, -0.5f, -0.5f,  0.0f, 1.0f},
+    {0.5f, -0.5f, -0.5f,  0.0f, 1.0f},
+    {0.5f, -0.5f,  0.5f,  0.0f, 0.0f},
+    {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+
+    {-0.5f, -0.5f, -0.5f,  0.0f, 1.0f},
+    {0.5f, -0.5f, -0.5f,  1.0f, 1.0f},
+    {0.5f, -0.5f,  0.5f,  1.0f, 0.0f},
+    {0.5f, -0.5f,  0.5f,  1.0f, 0.0f},
+    {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f},
+    {-0.5f, -0.5f, -0.5f,  0.0f, 1.0f},
+
+    {-0.5f,  0.5f, -0.5f,  0.0f, 1.0f},
+    {0.5f,  0.5f, -0.5f,  1.0f, 1.0f},
+    {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+    {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+    {-0.5f,  0.5f,  0.5f,  0.0f, 0.0f},
+    {-0.5f,  0.5f, -0.5f,  0.0f, 1.0f}
+};
+
 
 class RenderEngine
 {
 private:
-    vector<Object> objects;
+    vector<Object*> Objects;
+    vector<Material*> Materials;
+    vector<Light*> Lights;
+
+    static RenderEngine* Eng;
+public:
     Camera* camera;
-    
-public: 
     GLFWwindow* window;
     int width, height;
+    vec3 gloabal_light_color = {1,1,1};
+    float gloabal_light_power=0.5f;
 private:
     void init() {
+
         glfwSetErrorCallback(error_callback);
 
 
@@ -40,37 +93,131 @@ private:
 
     }
 
-    void UpdateObject(Object object) {
-
+    void UpdateObject(Object* object) {
+        object->UseShader(camera->projection, camera->look_at, gloabal_light_color, gloabal_light_power);
     }
 
     void Update() {
         glViewport(0, 0, width, height);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        for (Object object : objects)
+        for (Object* object : Objects){
             UpdateObject(object);
+            //printf("obj");
+        }
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+    {
+        if (key == GLFW_KEY_P)
+            if (action == GLFW_PRESS)
+            {
+                perspective = !perspective;
+                printf("changed view");
+            }
+        if (key == GLFW_KEY_A)
+            if (action == GLFW_PRESS)
+            {
+                Add(Eng);
+                printf("added object");
+            }
+
+        if (key == GLFW_KEY_DOWN) {
+            printf("down");
+            if (action == GLFW_PRESS)
+                moving_direction_y -= 1;
+            if (action == GLFW_RELEASE)
+                moving_direction_y += 1;
+        }
+        if (key == GLFW_KEY_UP) {
+            printf("up");
+            if (action == GLFW_PRESS)
+                moving_direction_y += 1;
+            if (action == GLFW_RELEASE)
+                moving_direction_y -= 1;
+        }
+        if (key == GLFW_KEY_LEFT) {
+            printf("left");
+            if (action == GLFW_PRESS)
+                moving_direction_x -= 1;
+            if (action == GLFW_RELEASE)
+                moving_direction_x += 1;
+        }
+        if (key == GLFW_KEY_RIGHT) {
+            printf("right");
+            if (action == GLFW_PRESS)
+                moving_direction_x += 1;
+            if (action == GLFW_RELEASE)
+                moving_direction_x -= 1;
+        }
+
+        if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+            glfwSetWindowShouldClose(window, GLFW_TRUE);
+    }
+
+    void Work() {
+        while (!glfwWindowShouldClose(window)) {
+            Update();
+        }
+
+        glfwDestroyWindow(window);
+
+        glfwTerminate();
+        exit(EXIT_SUCCESS);
+        printf("Destroy RE");
+    }
+
+    RenderEngine() {
+        camera = NULL;
+        init();
+        glfwSetKeyCallback(window, key_callback);
+        AddCamera();
+        printf("Create RE");
+        Materials.push_back(new Material(new vec3 {1,1,1}, 0.5f, 32));
+    }
 public:
+    static RenderEngine* GetInstance() {
+        if (Eng == NULL) {
+            Eng = new RenderEngine();
+    }
+        return Eng;
+    }
+    void Start() {
+        Work();
+    }
     void AddCamera() {
         camera = new Camera(window);
     }
-    Object* AddObject(float* model, Material material) {
+    Material* CreateMaterial(vec3 color, float specular, float specular_routhness) {
+        
+        Materials.push_back(new Material(color, specular, specular_routhness));
+        return Materials.back();
+    }
+    Object* AddObject(Vertices* model) {
         vec3 pos = { 0,0,0 };
-        return new Object(material, pos, model);
+        vec3 color = { 1,1,1 };
+        if(Materials.size() == 0)
+            Materials.push_back(new Material(color, 0.5f, 32));
+
+        Object* obj = new Object(Materials[0], pos, model);
+        Objects.push_back(obj);
+        return obj;
     }
 
     void MoveObject(Object object, vec3 dir) {
         vec3_add(object.position, object.position, dir);
     }
 
-    RenderEngine() {
-
-    }
  
+    static void Add(RenderEngine* eng) {
+        eng->AddObject(squad);
+    }
+
 };
+
+
+
 
