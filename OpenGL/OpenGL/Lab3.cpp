@@ -45,49 +45,54 @@ static float squad[] = {
         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 };
 
-float squad1[] = {
-        -0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-         0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-         0.5f,  0.5f, -0.5f,  1.0f, 0.0f,
-         0.5f,  0.5f, -0.5f,  1.0f, 0.0f,
-        -0.5f,  0.5f, -0.5f,  1.0f, 0.0f,
-         0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-
-        -0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        -0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-
-        -0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-        -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-        -0.5f, -0.5f,  0.5f,  1.0f, 1.0f,
-        -0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-
-         0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-         0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-         0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-         0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-         0.5f, -0.5f,  0.5f,  0.0f, 1.0f,
-         0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-
-        -0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-         0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-         0.5f, -0.5f,  0.5f,  1.0f, 1.0f,
-         0.5f, -0.5f,  0.5f,  1.0f, 1.0f,
-        -0.5f, -0.5f,  0.5f,  1.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-
-        -0.5f,  0.5f, -0.5f,  1.0f, 0.0f,
-         0.5f,  0.5f, -0.5f,  1.0f, 0.0f,
-         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        -0.5f,  0.5f, -0.5f,  1.0f, 0.0f
+struct Vertices {
+    float x, y, z;
+    float Nx, Ny, Nz;
 };
+static Vertices squad1[] = {
+    {-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.f},
+    {0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.f},
+    {0.5f,  0.5f, -0.5f,  0.0f, 0.0f, -1.f},
+    {0.5f,  0.5f, -0.5f,  0.0f, 0.0f, -1.f},
+    {-0.5f,  0.5f, -0.5f,  0.0f, 0.0f, -1.f},
+    {-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.f},
+
+    {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.f},
+    {0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 1.f},
+    {0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.f},
+    {0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.f},
+    {-0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.f},
+    {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.f},
+
+    {-0.5f,  0.5f,  0.5f,  -1.0f, 0.0f, 0.0f},
+    {-0.5f,  0.5f, -0.5f,  -1.0f, 0.0f, 0.0f},
+    {-0.5f, -0.5f, -0.5f,  -1.0f, 0.0f, 0.0f},
+    {-0.5f, -0.5f, -0.5f,  -1.0f, 0.0f, 0.0f},
+    {-0.5f, -0.5f,  0.5f,  -1.0f, 0.0f, 0.0f},
+    {-0.5f,  0.5f,  0.5f,  -1.0f, 0.0f, 0.0f},
+
+    {0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f},
+    {0.5f,  0.5f, -0.5f,  1.0f, 0.0f, 0.0f},
+    {0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f},
+    {0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f},
+    {0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f},
+    {0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f},
+
+    {-0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f},
+    {0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f},
+    {0.5f, -0.5f,  0.5f,  0.0f, -1.0f, 0.0f},
+    {0.5f, -0.5f,  0.5f,  0.0f, -1.0f, 0.0f},
+    {-0.5f, -0.5f,  0.5f,  0.0f, -1.0f, 0.0f},
+    {-0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f},
+
+    {-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f},
+    {0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f},
+    {0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f},
+    {0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f},
+    {-0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f},
+    {-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f}
+};
+
 static const char* vertex_shader_text =
 "#version 110\n"
 "uniform mat4 MVP;\n"
@@ -228,7 +233,7 @@ void lab3(void)
 
     glGenBuffers(1, &squad_vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, squad_vertex_buffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(squad), squad, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 36*sizeof(Vertices), squad1, GL_STATIC_DRAW);
 
     shaders();
 
@@ -292,12 +297,11 @@ void lab3(void)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glUseProgram(program);
-        glVertexAttribPointer(vpos_location, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+        glVertexAttribPointer(vpos_location, 3, GL_FLOAT, GL_FALSE, sizeof(squad1[0]), (void*)0);
         glEnableVertexAttribArray(vpos_location);
-        glVertexAttribPointer(vcol_location, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+        glVertexAttribPointer(vcol_location, 2, GL_FLOAT, GL_FALSE, sizeof(squad1[0]), (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(vcol_location);
-        //sizeof(squad[0])
-        
+
         glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)m);
         glUniformMatrix4fv(view_location, 1, GL_FALSE, (const GLfloat*)look_at);
         glUniformMatrix4fv(projection_location, 1, GL_FALSE, (const GLfloat*)projection);
@@ -307,7 +311,7 @@ void lab3(void)
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-
+    printf("%u\n", sizeof(squad1));
     glfwDestroyWindow(window);
 
     glfwTerminate();

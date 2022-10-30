@@ -9,47 +9,47 @@
 using namespace std;
 
 static Vertices squad[] = {
-    {-0.5f, -0.5f, -0.5f,  0.0f, 0.0f},
-    {0.5f, -0.5f, -0.5f,  1.0f, 0.0f},
-    {0.5f,  0.5f, -0.5f,  1.0f, 1.0f},
-    {0.5f,  0.5f, -0.5f,  1.0f, 1.0f},
-    {-0.5f,  0.5f, -0.5f,  0.0f, 1.0f},
-    {-0.5f, -0.5f, -0.5f,  0.0f, 0.0f},
+    {-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.f},
+    {0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.f},
+    {0.5f,  0.5f, -0.5f,  0.0f, 0.0f, -1.f},
+    {0.5f,  0.5f, -0.5f,  0.0f, 0.0f, -1.f},
+    {-0.5f,  0.5f, -0.5f,  0.0f, 0.0f, -1.f},
+    {-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.f},
 
-    {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f},
-    {0.5f, -0.5f,  0.5f,  1.0f, 0.0f},
-    {0.5f,  0.5f,  0.5f,  1.0f, 1.0f,},
-    {0.5f,  0.5f,  0.5f,  1.0f, 1.0f,},
-    {-0.5f,  0.5f,  0.5f,  0.0f, 1.0f},
-    {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f},
+    {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.f},
+    {0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 1.f},
+    {0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.f},
+    {0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.f},
+    {-0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.f},
+    {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.f},
 
-    {-0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
-    {-0.5f,  0.5f, -0.5f,  1.0f, 1.0f},
-    {-0.5f, -0.5f, -0.5f,  0.0f, 1.0f},
-    {-0.5f, -0.5f, -0.5f,  0.0f, 1.0f},
-    {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f},
-    {-0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+    {-0.5f,  0.5f,  0.5f,  -1.0f, 0.0f, 0.0f},
+    {-0.5f,  0.5f, -0.5f,  -1.0f, 0.0f, 0.0f},
+    {-0.5f, -0.5f, -0.5f,  -1.0f, 0.0f, 0.0f},
+    {-0.5f, -0.5f, -0.5f,  -1.0f, 0.0f, 0.0f},
+    {-0.5f, -0.5f,  0.5f,  -1.0f, 0.0f, 0.0f},
+    {-0.5f,  0.5f,  0.5f,  -1.0f, 0.0f, 0.0f},
 
-    {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
-    {0.5f,  0.5f, -0.5f,  1.0f, 1.0f},
-    {0.5f, -0.5f, -0.5f,  0.0f, 1.0f},
-    {0.5f, -0.5f, -0.5f,  0.0f, 1.0f},
-    {0.5f, -0.5f,  0.5f,  0.0f, 0.0f},
-    {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+    {0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f},
+    {0.5f,  0.5f, -0.5f,  1.0f, 0.0f, 0.0f},
+    {0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f},
+    {0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f},
+    {0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f},
+    {0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f},
 
-    {-0.5f, -0.5f, -0.5f,  0.0f, 1.0f},
-    {0.5f, -0.5f, -0.5f,  1.0f, 1.0f},
-    {0.5f, -0.5f,  0.5f,  1.0f, 0.0f},
-    {0.5f, -0.5f,  0.5f,  1.0f, 0.0f},
-    {-0.5f, -0.5f,  0.5f,  0.0f, 0.0f},
-    {-0.5f, -0.5f, -0.5f,  0.0f, 1.0f},
+    {-0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f},
+    {0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f},
+    {0.5f, -0.5f,  0.5f,  0.0f, -1.0f, 0.0f},
+    {0.5f, -0.5f,  0.5f,  0.0f, -1.0f, 0.0f},
+    {-0.5f, -0.5f,  0.5f,  0.0f, -1.0f, 0.0f},
+    {-0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f},
 
-    {-0.5f,  0.5f, -0.5f,  0.0f, 1.0f},
-    {0.5f,  0.5f, -0.5f,  1.0f, 1.0f},
-    {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
-    {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
-    {-0.5f,  0.5f,  0.5f,  0.0f, 0.0f},
-    {-0.5f,  0.5f, -0.5f,  0.0f, 1.0f}
+    {-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f},
+    {0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f},
+    {0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f},
+    {0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f},
+    {-0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f},
+    {-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f}
 };
 
 
@@ -76,8 +76,8 @@ private:
         if (!glfwInit())
             exit(EXIT_FAILURE);
 
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
         window = glfwCreateWindow(640, 480, "Lab4", NULL, NULL);
         if (!window)
@@ -103,7 +103,6 @@ private:
 
         for (Object* object : Objects){
             UpdateObject(object);
-            //printf("obj");
         }
 
         glfwSwapBuffers(window);
@@ -116,38 +115,38 @@ private:
             if (action == GLFW_PRESS)
             {
                 perspective = !perspective;
-                printf("changed view");
+                printf("changed view\n");
             }
         if (key == GLFW_KEY_A)
             if (action == GLFW_PRESS)
             {
                 Add(Eng);
-                printf("added object");
+                printf("added object\n");
             }
 
         if (key == GLFW_KEY_DOWN) {
-            printf("down");
+            printf("down\n");
             if (action == GLFW_PRESS)
                 moving_direction_y -= 1;
             if (action == GLFW_RELEASE)
                 moving_direction_y += 1;
         }
         if (key == GLFW_KEY_UP) {
-            printf("up");
+            printf("up\n");
             if (action == GLFW_PRESS)
                 moving_direction_y += 1;
             if (action == GLFW_RELEASE)
                 moving_direction_y -= 1;
         }
         if (key == GLFW_KEY_LEFT) {
-            printf("left");
+            printf("left\n");
             if (action == GLFW_PRESS)
                 moving_direction_x -= 1;
             if (action == GLFW_RELEASE)
                 moving_direction_x += 1;
         }
         if (key == GLFW_KEY_RIGHT) {
-            printf("right");
+            printf("right\n");
             if (action == GLFW_PRESS)
                 moving_direction_x += 1;
             if (action == GLFW_RELEASE)
@@ -167,7 +166,7 @@ private:
 
         glfwTerminate();
         exit(EXIT_SUCCESS);
-        printf("Destroy RE");
+        printf("Destroy RE\n");
     }
 
     RenderEngine() {
@@ -175,7 +174,7 @@ private:
         init();
         glfwSetKeyCallback(window, key_callback);
         AddCamera();
-        printf("Create RE");
+        printf("Create RE\n");
         Materials.push_back(new Material(new vec3 {1,1,1}, 0.5f, 32));
     }
 public:
@@ -206,12 +205,9 @@ public:
         Objects.push_back(obj);
         return obj;
     }
-
     void MoveObject(Object object, vec3 dir) {
         vec3_add(object.position, object.position, dir);
     }
-
- 
     static void Add(RenderEngine* eng) {
         eng->AddObject(squad);
     }

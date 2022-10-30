@@ -10,7 +10,7 @@ struct Vertices {
 class Object
 {
 private:
-	GLint mvp_location, projection_location, texture_indx_location, view_location, vpos_location, vcol_location;
+	GLint vpos_location;
 public:
 	Vertices* model;
 	vec3 position;
@@ -25,28 +25,28 @@ public:
 
 	void UseShader(mat4x4 projection, mat4x4 view, vec3 gloabal_light_color, float gloabal_light_power) {
 		GLuint program = material->CompileShaders();
-
+		//printf("%f",(model[35]).x);
 		GLuint vertex_buffer;
 		glGenBuffers(1, &vertex_buffer);
 		glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(model), model, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, 36 * sizeof(Vertices), model, GL_STATIC_DRAW);
 
 		glUseProgram(program);
 
 		vpos_location = glGetAttribLocation(program, "vPos");
-		glVertexAttribPointer(vpos_location, 3, GL_FLOAT, GL_FALSE, sizeof(Vertices), (void*)0);
+		glVertexAttribPointer(vpos_location, 3, GL_FLOAT, GL_FALSE, sizeof(model[0]), (void*)0);
 		glEnableVertexAttribArray(vpos_location);
 
 
-		glUniform1fv(glGetUniformLocation(program, "color"), sizeof(material->color), material->color);
+		/*glUniform1fv(glGetUniformLocation(program, "color"), sizeof(material->color), material->color);
 		glUniform1fv(glGetUniformLocation(program, "gloabalLightColor"), sizeof(gloabal_light_color), gloabal_light_color);
 		glUniform1f(glGetUniformLocation(program, "globalLightPower"), gloabal_light_power);
 		glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, (const GLfloat*)view);
-		glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, (const GLfloat*)projection);
+		glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, (const GLfloat*)projection);*/
 
-		glDrawArrays(GL_TRIANGLES, 0, 36);// floor(sizeof(model) / sizeof(Vertices)));
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glDisableVertexAttribArray(vpos_location);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		//glBindBuffer(GL_ARRAY_BUFFER, 0);
+		//glDisableVertexAttribArray(vpos_location);
 	}
 };
 
