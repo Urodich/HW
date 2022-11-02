@@ -1,36 +1,28 @@
-﻿  Lab3.cpp
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(585,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,51): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,20): warning C4244: инициализация: преобразование "double" в "const float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Lab3.cpp(175,23): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Lab3.cpp(314,12): warning C4477: "printf": в строке форматирования "%u" требуется аргумент типа "unsigned int", но вариативный аргумент "1" имеет тип "size_t"
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Lab3.cpp(314,12): message : рекомендуется использовать "%zu" в строке форматирования
-  Main.cpp
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(585,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Camera.h(24,28): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Main.cpp(29,13): warning C4326: возвращаемый тип "main" должен быть "int", а не "void"
+﻿  Main.cpp
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(585,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\OpenGL\Camera.h(24,28): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\OpenGL\Main.cpp(29,13): warning C4326: возвращаемый тип "main" должен быть "int", а не "void"
   Material.cpp
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(585,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,51): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,20): warning C4244: инициализация: преобразование "double" в "const float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(585,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(602,51): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(602,20): warning C4244: инициализация: преобразование "double" в "const float", возможна потеря данных
   Object.cpp
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(585,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,51): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,20): warning C4244: инициализация: преобразование "double" в "const float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(585,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(602,51): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(602,20): warning C4244: инициализация: преобразование "double" в "const float", возможна потеря данных
   RenderEngine.cpp
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(585,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,51): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,20): warning C4244: инициализация: преобразование "double" в "const float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\OpenGL\Camera.h(24,28): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(585,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(602,51): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(602,20): warning C4244: инициализация: преобразование "double" в "const float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\OpenGL\Camera.h(24,28): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
   Shaders.cpp
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(585,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,51): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-C:\Users\Владелец\Desktop\домашка\HW\OpenGL\linmath\linmath.h(602,20): warning C4244: инициализация: преобразование "double" в "const float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(585,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(591,18): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(602,51): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\linmath\linmath.h(602,20): warning C4244: инициализация: преобразование "double" в "const float", возможна потеря данных
   Создание кода...
-  OpenGL.vcxproj -> C:\Users\Владелец\Desktop\домашка\HW\OpenGL\x64\Debug\OpenGL.exe
+  OpenGL.vcxproj -> C:\Users\maksz\OneDrive\Рабочий стол\Home\HW\OpenGL\x64\Debug\OpenGL.exe

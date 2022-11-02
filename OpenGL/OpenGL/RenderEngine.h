@@ -101,6 +101,8 @@ private:
         glViewport(0, 0, width, height);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        camera->UpdateCamera();
+
         for (Object* object : Objects){
             UpdateObject(object);
         }
