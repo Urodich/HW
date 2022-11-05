@@ -311,7 +311,6 @@ void lab3(void)
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    printf("%u\n", sizeof(squad1));
     glfwDestroyWindow(window);
 
     glfwTerminate();

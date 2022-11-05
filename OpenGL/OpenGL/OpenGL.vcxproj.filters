@@ -63,6 +63,9 @@
     <ClCompile Include="Shaders.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Lab5.cpp">
+      <Filter>Исходные файлы\labs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\glad\include\glad\glad.h">

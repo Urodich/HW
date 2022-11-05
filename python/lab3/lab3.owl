@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#"
+     xml:base="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#associated_with -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#associated_with">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ТЕХНОЛОГИЯ"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ"/>
+        <rdfs:label>ассоциация</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#асс -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#асс">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ВЕБ-КАМЕРА"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ТЕХНОЛОГИЯ"/>
+        <rdfs:label>ассоциация2</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ВЕБ-КАМЕРА -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ВЕБ-КАМЕРА"/>
+    
+
+
+    <!-- http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ"/>
+    
+
+
+    <!-- http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ВЕЩАНИЕ -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ВЕЩАНИЕ">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ТЕХНОЛОГИЯ"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ПОИСК -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ПОИСК">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ТЕХНОЛОГИЯ"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ТЕХНОЛОГИЯ -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ТЕХНОЛОГИЯ">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНФОРМАЦИОННЫЕ_ТЕХНОЛОГИИ"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНФОРМАЦИОННЫЕ_ТЕХНОЛОГИИ -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНФОРМАЦИОННЫЕ_ТЕХНОЛОГИИ"/>
+    
+
+
+    <!-- http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#РЕКЛАМА_ПО_ИНТЕРНЕТУ -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#РЕКЛАМА_ПО_ИНТЕРНЕТУ">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ТЕХНОЛОГИЯ"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#СЕТЕВОЕ_ОБЩЕНИЕ -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#СЕТЕВОЕ_ОБЩЕНИЕ">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ТЕХНОЛОГИЯ"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#СПАМ -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#СПАМ">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ТЕХНОЛОГИЯ"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ХОСТИНГ_САЙТОВ -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ХОСТИНГ_САЙТОВ">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ТЕХНОЛОГИЯ"/>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

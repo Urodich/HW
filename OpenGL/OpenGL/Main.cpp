@@ -4,7 +4,7 @@
 #include <thread>
 using namespace std;
 
-int main1() {
+int main() {
 	char num;
 	cout << "lab number";
 	cin >> num;
@@ -19,6 +19,8 @@ int main1() {
 		lab3();
 	case'4':
 		lab4();
+	case'5':
+		lab5();
 	default:
 		break;
 	}
@@ -26,7 +28,7 @@ int main1() {
 }
 
 RenderEngine* RenderEngine::Eng = NULL;
-void main() {
+void main1() {
 	
 	RenderEngine* Eng = RenderEngine::GetInstance();
 	Eng->Start();
