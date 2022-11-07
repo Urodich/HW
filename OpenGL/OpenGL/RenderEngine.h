@@ -65,7 +65,7 @@ public:
     Camera* camera;
     GLFWwindow* window;
     int width, height;
-    vec3 gloabal_light_color = {1,1,1};
+    vec3 gloabal_light_color = {0.5f,0.5f,0.5};
     float gloabal_light_power=0.5f;
 private:
     void init() {
@@ -99,6 +99,7 @@ private:
 
     void Update() {
         glViewport(0, 0, width, height);
+        glClearColor(gloabal_light_color[0], gloabal_light_color[1], gloabal_light_color[2], 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         camera->UpdateCamera();

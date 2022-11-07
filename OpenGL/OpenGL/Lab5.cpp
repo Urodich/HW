@@ -94,21 +94,27 @@ static Vertices squad1[] = {
 };
 
 static const char* vertex_shader_text =
-"#version 110\n"
+"#version 330\n"
 "uniform mat4 MVP;\n"
 "uniform mat4 projection;\n"
 "uniform mat4 view;\n"
 "uniform vec3 color;\n"
-"uniform vec3 gloabalLightColor;\n"
+"uniform vec3 globalLightColor;\n"
 "uniform float globalLightPower;\n"
-"attribute vec2 vCol;\n"
+
+"attribute vec3 vNorm;\n"
 "attribute vec3 vPos;\n"
-"varying vec3 colorTR;\n"
+
+"out vec3 colorTR;\n"
+"out vec3 Normal;\n"
+"out vec3 FragPos;"
+
 "void main()\n"
 "{\n"
 "    gl_Position = projection * view * vec4(vPos, 1.0);\n"
-"    colorTR=color:"//vec3(vCol,1.0);"
-
+"    FragPos = vec4(vPos, 1.0);\n"
+"    colorTR= color;\n"
+"    Normal = vNorm;\n"
 "}\n";
 
 //
@@ -117,10 +123,20 @@ static const char* vertex_shader_text =
 static const char* fragment_shader_text =
 "#version 330 core\n"
 "in vec3 colorTR;\n"
+"in vec3 Normal\n;"
+"in vec3 FragPos;\n"
+
+"uniform vec3 lightPos;\n"
 "out vec4 Color;\n"
 "void main()\n"
 "{\n"
-"    Color = vec4(colorTR, 1.0);\n"
+"    vec3 ambient = globalLightPower * globalLightColor;"
+"    vec3 norm = normalize(Normal);"
+"    vec3 lightDir = normalize(lightPos - FragPos); "
+"    float diff = max(dot(norm, lightDir), 0.0);"
+"    vec3 diffuse = diff * globalLightColor;"
+"    vec3 result = (ambient + diffuse) * colorTR;"
+"    Color = vec4(result, 1.0);\n"
 "}\n";
 
 
@@ -133,7 +149,7 @@ static float ratio, speed = 0.3f, fov = 45.f;
 static int width, height;
 static mat4x4 m, projection, look_at;
 
-static vec3 cameraX, cameraY, offset, cameraPos = { 0,0,3 }, aim = { 0,0,0 }, up = { 0,1,0 };
+static vec3 cameraX, cameraY, offset, lightPos = {2, 2, 4}, cameraPos = { 0,0,3 }, aim = { 0,0,0 }, up = { 0,1,0 };
 
 
 static void key_callback3(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -191,7 +207,7 @@ static void init() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
-    window = glfwCreateWindow(640, 480, "Lab3", NULL, NULL);
+    window = glfwCreateWindow(640, 480, "Lab5", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -265,8 +281,6 @@ void lab5(void)
 
     init();
 
-    //NOTE: OpenGL error checks have been omitted for brevity
-
     glGenBuffers(1, &squad_vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, squad_vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER, 36 * sizeof(Vertices), squad1, GL_STATIC_DRAW);
@@ -283,7 +297,7 @@ void lab5(void)
 
     while (!glfwWindowShouldClose(window))
     {
-
+        glClearColor(0.6,0.6,0.6, 1.0f);
         //moving
         camera();
 
@@ -293,11 +307,17 @@ void lab5(void)
         glUseProgram(program);
         glVertexAttribPointer(vpos_location, 3, GL_FLOAT, GL_FALSE, sizeof(squad1[0]), (void*)0);
         glEnableVertexAttribArray(vpos_location);
-        glVertexAttribPointer(vcol_location, 2, GL_FLOAT, GL_FALSE, sizeof(squad1[0]), (void*)(3 * sizeof(float)));
+        glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE, sizeof(squad1[0]), (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(vcol_location);
 
-        vec3 color = { 1.0f,1.0f,1.0f };
-        glUniform3f(glGetUniformLocation(program, "color"), 1.f,1.f,1.f);
+        vec3 color = { 0.3f, 1.f, 0.7f };
+        //glUniform1fv(glGetUniformLocation(program, "color"), 3, color);
+        glUniform3f(glGetUniformLocation(program, "color"), 0.3f, 1.f, 0.7f);
+        glUniform1f(glGetUniformLocation(program, "globalLightPower"), 0.6f);
+        glUniform3f(glGetUniformLocation(program, "globalLightColor"), 1.f, 0.6f, 1.f);
+
+        glUniform3f(glGetUniformLocation(program, "lightPos"), 2.f, 2.f, 4.f);
+
         glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, (const GLfloat*)look_at);
         glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, (const GLfloat*)projection);
 

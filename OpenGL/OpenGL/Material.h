@@ -2,17 +2,20 @@
 #include "Header.h"
 
 static const char* vertex_shader_text =
-"#version 110\n"
+"#version 330\n"
+"uniform mat4 MVP;\n"
 "uniform mat4 projection;\n"
 "uniform mat4 view;\n"
-//"uniform vec3 color;"
-//"uniform vec3 gloabalLightColor;"
-//"uniform float globalLightPower;"
-
+"uniform vec3 color;\n"
+"uniform vec3 gloabalLightColor;\n"
+"uniform float globalLightPower;\n"
 "attribute vec3 vPos;\n"
+"out vec3 colorTR;\n"
+
 "void main()\n"
 "{\n"
-"    gl_Position = projection * view * vec4(vPos, 1.0);\n"
+"    gl_Position = vec4(vPos, 1.0);\n"//projection * view *
+"    colorTR= gloabalLightColor * color * globalLightPower;"
 "}\n";
 
 //
@@ -20,11 +23,11 @@ static const char* vertex_shader_text =
 
 static const char*  fragment_shader_text =
 "#version 330 core\n"
+"in vec3 colorTR;\n"
 "out vec4 Color;\n"
 "void main()\n"
 "{\n"
-//"	 vec3 result = gloabalLightColor * globalLightPower * color;"
-"    Color = vec4(1.0, 1.0, 1.0, 1.0);"//vec4(result, 1.0);\n"
+"    Color = vec4(colorTR, 1.0);\n"
 "}\n";
 
 

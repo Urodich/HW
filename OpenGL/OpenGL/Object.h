@@ -37,16 +37,18 @@ public:
 		glVertexAttribPointer(vpos_location, 3, GL_FLOAT, GL_FALSE, sizeof(model[0]), (void*)0);
 		glEnableVertexAttribArray(vpos_location);
 
-
-		/*glUniform1fv(glGetUniformLocation(program, "color"), sizeof(material->color), material->color);
-		glUniform1fv(glGetUniformLocation(program, "gloabalLightColor"), sizeof(gloabal_light_color), gloabal_light_color);
+		glUniform3f(glGetUniformLocation(program, "color"), 0.3f, 1.f, 0.7f);
+		glUniform1f(glGetUniformLocation(program, "globalLightPower"), 0.6f);
+		glUniform3f(glGetUniformLocation(program, "gloabalLightColor"), 1.f, 0.6f, 1.f);
+		glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, (const GLfloat*)view);
+		glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, (const GLfloat*)projection);
+		/*glUniform3f(glGetUniformLocation(program, "color"), material->color[0], material->color[0], material->color[0]);
+		glUniform3f(glGetUniformLocation(program, "gloabalLightColor"), material->color[0], material->color[0], material->color[0]);
 		glUniform1f(glGetUniformLocation(program, "globalLightPower"), gloabal_light_power);
 		glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, (const GLfloat*)view);
 		glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, (const GLfloat*)projection);*/
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-		//glBindBuffer(GL_ARRAY_BUFFER, 0);
-		//glDisableVertexAttribArray(vpos_location);
 	}
 };
 
