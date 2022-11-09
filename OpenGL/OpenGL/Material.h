@@ -7,27 +7,51 @@ static const char* vertex_shader_text =
 "uniform mat4 projection;\n"
 "uniform mat4 view;\n"
 "uniform vec3 color;\n"
-"uniform vec3 gloabalLightColor;\n"
-"uniform float globalLightPower;\n"
+
+"attribute vec3 vNorm;\n"
 "attribute vec3 vPos;\n"
+
 "out vec3 colorTR;\n"
+"out vec3 Normal;\n"
+"out vec3 FragPos;"
 
 "void main()\n"
 "{\n"
-"    gl_Position = vec4(vPos, 1.0);\n"//projection * view *
-"    colorTR= gloabalLightColor * color * globalLightPower;"
+"    gl_Position = projection * view * MVP * vec4(vPos, 1.0);\n"
+"    FragPos = vec3(MVP * vec4(vPos, 1.0));\n"
+"    colorTR= color;\n"
+"    Normal = vNorm;\n"
 "}\n";
 
-//
 
-
-static const char*  fragment_shader_text =
+static const char* fragment_shader_text =
 "#version 330 core\n"
 "in vec3 colorTR;\n"
+"in vec3 Normal;\n;"
+"in vec3 FragPos;\n"
+
+"uniform vec3 globalLightColor;\n"
+"uniform float globalLightPower;\n"
+"uniform vec3 lightPos;\n"
+"uniform float lightPower;\n"
+"uniform vec3 viewPos;\n"
+
 "out vec4 Color;\n"
 "void main()\n"
 "{\n"
-"    Color = vec4(colorTR, 1.0);\n"
+//"    vec3 viewDir = normalize(viewPos - FragPos);"
+//"    vec3 ambient = globalLightPower * globalLightColor;"
+//"    vec3 norm = normalize(Normal);"
+//"    vec3 lightDir = normalize(lightPos - FragPos); "
+////"    vec3 lightDir = normalize(lightPos); "
+//"    float diff = max(dot(norm, lightDir), 0.0);"
+//"    vec3 diffuse = diff * globalLightColor * lightPower;"
+//"    vec3 reflectDir = reflect(-lightDir, Normal); "
+//"    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128);"
+//"    vec3 specular = 0.5 * spec * globalLightColor;"
+//"    vec3 result = (ambient + diffuse + specular) * colorTR;"
+//"    Color = vec4(result, 1.0);\n"
+"Color = vec4(1.0,1.0,1.0,1.0);"
 "}\n";
 
 

@@ -5,7 +5,7 @@
 
     MIT license
 */
-
+#include <Windows.h>
 #include "SOIL/image_helper.h"
 #include <stdlib.h>
 #include <math.h>

@@ -94,7 +94,7 @@ private:
     }
 
     void UpdateObject(Object* object) {
-        object->UseShader(camera->projection, camera->look_at, gloabal_light_color, gloabal_light_power);
+        object->UseShader(camera->projection, camera->look_at, camera->Position, gloabal_light_color, gloabal_light_power);
     }
 
     void Update() {
