@@ -32,6 +32,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#partOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#partOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -66,6 +74,12 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ВЕЩАНИЕ">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ИНТЕРНЕТ-ТЕХНОЛОГИЯ"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#partOf"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/maksz/ontologies/2022/9/lab3#ВЕБ-КАМЕРА"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 

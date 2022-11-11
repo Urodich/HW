@@ -16,10 +16,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>6831412.27656381297856569</xmin>
-      <ymin>7392455.11670354474335909</ymin>
-      <xmax>6831982.40957973059266806</xmax>
-      <ymax>7393022.74144934210926294</ymax>
+      <xmin>6831438.68506459891796112</xmin>
+      <ymin>7392352.65974795073270798</ymin>
+      <xmax>6831723.75157255679368973</xmax>
+      <ymax>7392636.47212085127830505</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -121,7 +121,7 @@
         </ComposerItem>
       </ComposerLabel>
       <ComposerMap followPreset="false" mapRotation="0" keepLayerSet="false" followPresetName="" id="0" previewMode="Cache" drawCanvasItems="true">
-        <Extent ymin="7392474.65733159985393286" xmin="6831172.65998932532966137" ymax="7393118.83657291065901518" xmax="6832091.56273060850799084"/>
+        <Extent ymin="7392474.65733159985393286" xmin="6831172.65998932532966137" ymax="7393118.83657291159033775" xmax="6832091.56273060850799084"/>
         <LayerSet/>
         <Grid/>
         <ComposerMapGrid rightAnnotationDirection="0" gridFramePenColor="0,0,0,255" show="0" bottomAnnotationPosition="1" annotationPrecision="3" showAnnotation="0" topFrameDivisions="0" uuid="{99ffa1cc-1627-460f-9fe6-48d1fd8bc033}" leftAnnotationDirection="0" topAnnotationPosition="1" rightAnnotationDisplay="0" offsetX="0" offsetY="0" rightFrameDivisions="0" gridStyle="0" annotationFontColor="0,0,0,255" intervalX="0" gridFrameSideFlags="15" intervalY="0" bottomAnnotationDirection="0" leftAnnotationDisplay="0" leftFrameDivisions="0" frameFillColor1="255,255,255,255" annotationExpression="" frameFillColor2="0,0,0,255" crossLength="3" gridFramePenThickness="0.5" bottomAnnotationDisplay="0" unit="0" topAnnotationDisplay="0" leftAnnotationPosition="1" blendMode="0" gridFrameStyle="0" rightAnnotationPosition="1" gridFrameWidth="2" name="Сетка 1" annotationFormat="0" bottomFrameDivisions="0" topAnnotationDirection="0" frameAnnotationDistance="1">
@@ -179,7 +179,14 @@
           <customproperties/>
         </ComposerItem>
       </ComposerMap>
-      <customproperties/>
+      <customproperties>
+        <property key="svgCropMarginBottom" value="0"/>
+        <property key="svgCropMarginLeft" value="0"/>
+        <property key="svgCropMarginRight" value="0"/>
+        <property key="svgCropMarginTop" value="0"/>
+        <property key="svgCropToContents" value="false"/>
+        <property key="svgGroupLayers" value="false"/>
+      </customproperties>
     </Composition>
   </Composer>
   <projectlayers>
@@ -465,6 +472,7 @@
       <SingleCategoryDiagramRenderer diagramType="Histogram" sizeLegend="0" attributeLegend="1">
         <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" sizeScale="0,0,0,0,0,0" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" lineSizeScale="0,0,0,0,0,0" sizeType="MM" lineSizeType="MM" minScaleDenominator="inf">
           <fontProperties description="MS Shell Dlg 2,8.25,-1,5,50,0,0,0,0,0" style=""/>
+          <attribute field="" color="#000000" label=""/>
         </DiagramCategory>
         <symbol alpha="1" clip_to_extent="1" type="marker" name="sizeSymbol">
           <layer pass="0" class="SimpleMarker" locked="0">
@@ -598,6 +606,9 @@ def my_form_open(dialog, layer, feature):
       <DefaultSnapType type="QString">off</DefaultSnapType>
       <DefaultSnapTolerance type="double">0</DefaultSnapTolerance>
     </Digitizing>
+    <PAL>
+      <DrawOutlineLabels type="bool">true</DrawOutlineLabels>
+    </PAL>
     <Identify>
       <disabledLayers type="QStringList"/>
     </Identify>
